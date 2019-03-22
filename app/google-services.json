@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "992332256619",
+    "firebase_url": "https://gatherup-3d9b7.firebaseio.com",
+    "project_id": "gatherup-3d9b7",
+    "storage_bucket": "gatherup-3d9b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992332256619:android:db9a53a7809f7588",
+        "android_client_info": {
+          "package_name": "com.gatherup.gahterup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992332256619-n1ksogif844umm0huf7gqs2vmk1qjb4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gatherup.gahterup",
+            "certificate_hash": "d969be759d4cdf7595a38785bf4a8f9ea13f5df2"
+          }
+        },
+        {
+          "client_id": "992332256619-b9g7n081u38bl3arq9icgcgd4rbjtgi1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gatherup.gahterup",
+            "certificate_hash": "33bb29a74c1ec77eab29694cab2a86b2939452ed"
+          }
+        },
+        {
+          "client_id": "992332256619-q2vcl62q8j1u4qgkrgco9fbvaj744rr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPwTYkSjw7qENvW5e2LDCxGo28R_c3GKM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992332256619-q2vcl62q8j1u4qgkrgco9fbvaj744rr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

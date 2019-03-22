@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePage">
+
+    <TextView
+        android:id="@+id/homepage_meetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/bungee"
+        android:text="@string/meetup"
+        android:textColor="@color/Blue"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/homepage_profilepicture"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/homepage_meetup"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/profile"
+        android:clickable="true" />
+
+    <EditText
+        android:id="@+id/homepage_search_et"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/homepage_profilepicture"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rectangle"
+        android:ems="12" />
+
+    <Button
+        android:id="@+id/homepage_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/homepage_profilepicture"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/homepage_search_et"
+        android:background="@drawable/search" />
+
+    <ScrollView
+        android:id="@+id/homepage_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/homepage_navigation"
+        android:layout_below="@id/homepage_search_et">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/homepage_projectsforyou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/projectsforyou"
+                android:textColor="@color/Blue" />
+
+            <TextView
+                android:id="@+id/homepage_announcements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/homepage_projectsforyou"
+                android:layout_alignStart="@id/homepage_projectsforyou"
+                android:layout_marginTop="200dp"
+                android:text="@string/announcements"
+                android:textColor="@color/Blue" />
+
+            <TextView
+                android:id="@+id/homepage_deadlines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/homepage_announcements"
+                android:layout_alignStart="@id/homepage_projectsforyou"
+                android:layout_marginTop="200dp"
+                android:text="@string/deadlines"
+                android:textColor="@color/Blue" />
+
+            <EditText
+                android:id="@+id/homepage_date_et"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/homepage_deadlines"
+                android:layout_alignStart="@id/homepage_deadlines"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/homepage_projectname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/homepage_date_et"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/homepage_date_et"
+                android:text="@string/projectname"
+                android:textColor="@color/Blue" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/homepage_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/homepage_scroll"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/homepage_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/Blue"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/navigation" />
+
+</RelativeLayout>
