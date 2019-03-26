@@ -32,7 +32,7 @@
         android:background="@drawable/rectangle"
         android:ems="11"
         android:hint="@string/name"
-        android:inputType="text" />
+        android:inputType="textCapWords" />
 
     <EditText
         android:id="@+id/register_surname"
@@ -44,7 +44,7 @@
         android:background="@drawable/rectangle"
         android:ems="11"
         android:hint="@string/surname"
-        android:inputType="text" />
+        android:inputType="textCapWords" />
 
     <EditText
         android:id="@+id/register_email"
@@ -55,7 +55,8 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle"
         android:ems="11"
-        android:hint="@string/email" />
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/register_password"
@@ -66,7 +67,8 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle"
         android:ems="11"
-        android:hint="@string/password" />
+        android:hint="@string/password"
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/register_passwordagain"
@@ -77,7 +79,8 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle"
         android:ems="11"
-        android:hint="@string/passwordagain" />
+        android:hint="@string/passwordagain"
+        android:inputType="textPassword" />
 
     <CheckBox
         android:id="@+id/register_policy_checkbox"

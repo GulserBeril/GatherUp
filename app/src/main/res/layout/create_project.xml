@@ -44,7 +44,8 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
                 android:ems="10"
-                android:hint="@string/projectname" />
+                android:hint="@string/projectname"
+                android:inputType="textCapWords" />
 
             <TextView
                 android:id="@+id/create_project_howmany_tv"
@@ -66,6 +67,7 @@
                 android:background="@drawable/rectangle"
                 android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
+                android:inputType="textCapWords"
                 android:onClick="create_project_howmany_click" />
 
             <TextView
@@ -87,7 +89,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
                 android:ems="10"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine|textCapWords" />
 
             <TextView
                 android:id="@+id/create_project_projectneeds_tv"
@@ -109,7 +111,8 @@
                 android:background="@drawable/rectangle"
                 android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
-                android:hint="@string/search" />
+                android:hint="@string/search"
+                android:inputType="textCapWords" />
 
             <TextView
                 android:id="@+id/create_project_onlymanager"

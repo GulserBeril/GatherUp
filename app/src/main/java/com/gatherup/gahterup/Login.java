@@ -1,11 +1,13 @@
 package com.gatherup.gahterup;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import java.util.Locale;
 
 public class Login extends AppCompatActivity {
     TextView login_tr, login_en, login_forgotpassword;
@@ -25,6 +26,8 @@ public class Login extends AppCompatActivity {
     Button login_login, login_register;
 
     FirebaseAuth auth;
+
+    Locale myLocale = Locale.getDefault();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +42,19 @@ public class Login extends AppCompatActivity {
         login_register = findViewById(R.id.login_register);
 
         auth = FirebaseAuth.getInstance();
-
     }
 
     public void login_login_click(View view) {
         String email = login_email_et.getText().toString();
         String password = login_password_et.getText().toString();
 
-        if (TextUtils.isEmpty(login_email_et.getText().toString()) || TextUtils.isEmpty(login_password_et.getText().toString())) {
-            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, this.getString(R.string.enter_email), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, this.getString(R.string.enter_password), Toast.LENGTH_SHORT).show();
+            return;
         } else {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -58,7 +65,8 @@ public class Login extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(Login.this, "Authentication failed!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
             });
@@ -76,11 +84,23 @@ public class Login extends AppCompatActivity {
     }
 
     public void login_en(View view) {
-
+        Toast.makeText(this, this.getString(R.string.EN_selected), Toast.LENGTH_SHORT).show();
+        setLocale("en");
     }
 
     public void login_tr(View view) {
-
+        Toast.makeText(this, this.getString(R.string.TR_selected), Toast.LENGTH_SHORT).show();
+        setLocale("tr");
     }
 
+    public void setLocale(String lang) {
+        myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent intent = new Intent(Login.this, Login.class);
+        startActivity(intent);
+    }
 }

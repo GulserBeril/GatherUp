@@ -11,9 +11,9 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
-        android:onClick="profile_back_click"
         android:layout_marginTop="10dp"
         android:background="@drawable/back"
+        android:onClick="profile_back_click"
         android:textAllCaps="false" />
 
     <ScrollView
@@ -57,7 +57,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="11"
                 android:hint="@string/name"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
 
             <EditText
                 android:id="@+id/profile_surname"
@@ -69,7 +69,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="11"
                 android:hint="@string/surname"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
 
             <EditText
                 android:id="@+id/profile_email"
@@ -115,7 +115,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="11"
                 android:hint="@string/universityname"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
 
             <EditText
                 android:id="@+id/profile_entranceyear"
@@ -127,7 +127,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="11"
                 android:hint="@string/entranceyear"
-                android:inputType="text" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/profile_abilities_interests"
@@ -149,18 +149,19 @@
                 android:layout_weight="3"
                 android:background="@drawable/rectangle"
                 android:drawableEnd="@drawable/drop_down"
-                android:ems="10" />
+                android:ems="10"
+                android:inputType="textCapWords" />
 
             <Button
                 android:id="@+id/profile_addmore_abilities"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignTop="@id/profile_combo"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/profile_combo"
-                android:layout_marginStart="10dp"
                 android:background="@drawable/circle"
-                android:text="@string/plus"/>
+                android:text="@string/plus" />
 
             <TextView
                 android:id="@+id/profile_addmore1"
@@ -193,7 +194,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="4"
                 android:hint="@string/year"
-                android:inputType="text" />
+                android:inputType="date" />
 
             <TextView
                 android:id="@+id/profile_slash1"
@@ -217,7 +218,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="4"
                 android:hint="@string/duty"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
 
             <TextView
                 android:id="@+id/profile_slash2"
@@ -241,7 +242,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="4"
                 android:hint="@string/position"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
 
             <TextView
                 android:id="@+id/profile_projects"
@@ -263,7 +264,7 @@
                 android:background="@drawable/rectangle"
                 android:ems="6"
                 android:hint="@string/projectname"
-                android:inputType="text"/>
+                android:inputType="textCapWords" />
 
             <EditText
                 android:id="@+id/profile_description"
@@ -286,7 +287,7 @@
                 android:layout_alignStart="@id/profile_projectname"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/circle"
-                android:text="@string/plus"/>
+                android:text="@string/plus" />
 
             <TextView
                 android:id="@+id/profile_addmore2"

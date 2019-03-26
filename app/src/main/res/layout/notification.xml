@@ -9,11 +9,11 @@
     <TextView
         android:id="@+id/notification_title"
         android:layout_width="wrap_content"
-        android:text="@string/Notification"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textColor="@color/Black"
-        android:layout_height="wrap_content" />
+        android:text="@string/Notification"
+        android:textColor="@color/Black" />
 
     <ScrollView
         android:id="@+id/notification_scroll"
@@ -31,11 +31,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:ems="12"
-                android:drawableRight="@drawable/search"
-                android:hint="@string/search"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle"/>
+                android:background="@drawable/rectangle"
+                android:drawableRight="@drawable/search"
+                android:ems="12"
+                android:hint="@string/search"
+                android:inputType="textCapWords" />
 
 
         </RelativeLayout>

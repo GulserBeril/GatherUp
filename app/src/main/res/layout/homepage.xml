@@ -13,7 +13,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/bungee"
-        android:text="@string/meetup"
         android:textColor="@color/Blue"
         android:textSize="20sp" />
 
@@ -34,7 +33,8 @@
         android:layout_alignTop="@id/homepage_profilepicture"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rectangle"
-        android:ems="12" />
+        android:ems="12"
+        android:inputType="textCapWords" />
 
     <Button
         android:id="@+id/homepage_search"

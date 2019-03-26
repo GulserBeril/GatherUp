@@ -23,7 +23,6 @@
     <string name="verificationcode">Verification code will be sent</string>
     <string name="entercode">Enter code here</string>
     <string name="ok">OK</string>
-    <string name="meetup">MeetUp</string>
     <string name="projectsforyou">Projects For You</string>
     <string name="announcements">Announcements and Shares</string>
     <string name="deadlines">Deadlines</string>
@@ -33,7 +32,7 @@
     <string name="Message">Message</string>
     <string name="Notification">Notification</string>
     <string name="Profile">Profile</string>
-    <string name="personalinfo">Personal Information</string>
+    <string name="personalinfo">Personal Informations</string>
     <string name="birthdate">Birth Date</string>
     <string name="educationalinfo">Educational Information</string>
     <string name="universityname">University Name</string>
@@ -63,11 +62,22 @@
     <string name="completed">Completed</string>
     <string name="support">Support</string>
     <string name="anyquestions">Any questions or problems regarding the system, please contact us.</string>
-    <string name="helpdesk">helpdesk@meetup.com.tr</string>
+    <string name="helpdesk">helpdesk@gatherup.com.tr</string>
     <string name="creditsandreferences">Credits and References</string>
     <string name="messages">Messages</string>
     <string name="plus">+</string>
-    <string name="openlist">V</string>
     <string name="addmore">Add More</string>
     <string name="abilities_interest">Abilities/Interests</string>
+    <string name="requiredfields">All fields are required</string>
+    <string name="EN_selected">English Selected</string>
+    <string name="TR_selected">Turkish Selected</string>
+    <string name="success_registration">Registration is successful</string>
+    <string name="failed_registration">Registration failed</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_surname">Enter surname</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Password too short, enter minimum 6 characters</string>
+    <string name="authentication_failed">Authentication failed</string>
+    <string name="password_match">Both password fields must be identical</string>
+    <string name="accept_policy">You have not accepted the policy terms</string>
 </resources>

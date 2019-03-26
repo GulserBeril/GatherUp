@@ -76,7 +76,8 @@
         android:layout_alignTop="@id/login_email"
         android:layout_marginStart="130dp"
         android:background="@drawable/rectangle"
-        android:ems="10" />
+        android:ems="10"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/login_password_et"
