@@ -1,9 +1,11 @@
 package com.gatherup.gahterup;
 import android.content.Intent;
+import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListPopupWindow;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Text;
 
 public class Profile extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
     EditText profile_combo;
@@ -22,6 +30,9 @@ public class Profile extends AppCompatActivity implements View.OnTouchListener, 
     Button profile_back, profile_addmore_abilities, profile_addmore_projects, profile_save;
     ImageView profile_profilepicture;
     EditText profile_name, profile_surname, profile_email, profile_birthdate, profile_universityname, profile_entranceyear, profile_year, profile_duty, profile_position, profile_projectname, profile_description;
+
+    FirebaseAuth auth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,7 @@ public class Profile extends AppCompatActivity implements View.OnTouchListener, 
         profile_projectname = findViewById(R.id.profile_projectname);
         profile_description = findViewById(R.id.profile_description);
 
+        auth = FirebaseAuth.getInstance();
 
         profile_combo.setOnTouchListener(this);
 
@@ -105,5 +117,32 @@ public class Profile extends AppCompatActivity implements View.OnTouchListener, 
     }
     public  void  profile_back_click(View view){
         super.onBackPressed();
+    }
+
+    public void profile_save_click(View view) {
+
+        final String name = profile_name.getText().toString();
+        final String surname = profile_surname.getText().toString();
+        final String email = profile_email.getText().toString();
+        final String birthdate =profile_birthdate.getText().toString();
+        final String universityname = profile_universityname.getText().toString();
+        final String enteranceyear = profile_entranceyear.getText().toString();
+        final String workyear=  profile_year.getText().toString();
+        final String duty = profile_duty.getText().toString();
+        final String position = profile_position.getText().toString();
+        final String projectName = profile_projectname.getText().toString();
+        final String projectDescription = profile_description.getText().toString();
+
+
+
+            db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("birthdate",birthdate);
+
+            db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("universityName", universityname);
+
+            Intent intent = new Intent(this,Project.class);
+            startActivity(intent);
+
+
+
     }
 }

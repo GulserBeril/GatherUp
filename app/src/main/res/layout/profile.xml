@@ -305,6 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_addmore_projects"
                 android:layout_centerHorizontal="true"
+                android:onClick="profile_save_click"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/round"

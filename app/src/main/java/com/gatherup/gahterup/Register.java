@@ -98,22 +98,25 @@ public class Register extends AppCompatActivity {
                 map.put("surname", "" + surname);
                 map.put("email", "" + email);
                 map.put("password", "" + password);
+                map.put("birthdate", "");
+                map.put("universityName", "");
+                map.put("enteranceyear", "");
+                map.put("duty", "");
+                map.put("position", "");
+                map.put("projectName", "");
+                map.put("projectDescription", "");
 
-                db.collection("users").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(Register.this, R.string.success_registration, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Register.this, HomePage.class);
-                        startActivity(intent);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Register.this, R.string.failed_registration, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                db.collection("users").document(auth.getCurrentUser().getUid().toString()).set(map);
+                Intent intent = new  Intent(getApplicationContext(), HomePage.class);
+                startActivity(intent);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Kayıt İşlemi Başarısız",Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }
 
