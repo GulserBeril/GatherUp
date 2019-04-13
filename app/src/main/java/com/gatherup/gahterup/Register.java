@@ -111,8 +111,19 @@ public class Register extends AppCompatActivity {
                 map.put("projectdescription", "");
 
                 db.collection("users").document(auth.getCurrentUser().getUid().toString()).set(map);
+
+                Map<String, String> map2 = new HashMap<>();
+                map2.put("project name", "");
+                map2.put("number of people", "");
+                map2.put("description","");
+                map2.put("project needs","");
+
+                db.collection("projects").document(auth.getCurrentUser().getUid().toString()).set(map2);
+
                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
+
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
