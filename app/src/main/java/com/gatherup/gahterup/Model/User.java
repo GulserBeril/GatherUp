@@ -7,33 +7,35 @@ public class User {
     String email;
     String password;
     String birthdate;
-    String universityName;
-    String enteranceyear;
-    String workyear;
+    String universityname;
+    String entranceyear;
+    String abilities;
+    String year;
     String duty;
     String position;
-    String projectName;
-    String projectDescription;
-
+    String projectname;
+    String projectdescription;
+    String imageURL;
 
 
     public User() {
     }
 
-    public User(String name, String surname, String email, String password,String birthdate,String universityName,String enteranceyear,
-                String workyear,String duty,String position,String projectName,String projectDescription) {
+    public User(String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, String abilities, String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.birthdate=birthdate;
-        this.universityName=universityName;
-        this.enteranceyear=enteranceyear;
-        this.workyear=workyear;
-        this.duty=duty;
-        this.position=position;
-        this.projectName=projectName;
-        this.projectDescription=projectDescription;
+        this.birthdate = birthdate;
+        this.universityname = universityname;
+        this.entranceyear = entranceyear;
+        this.abilities = abilities;
+        this.year = year;
+        this.duty = duty;
+        this.position = position;
+        this.projectname = projectname;
+        this.projectdescription = projectdescription;
+        this.imageURL = imageURL;
 
     }
 
@@ -69,36 +71,84 @@ public class User {
         this.password = password;
     }
 
-    public String getBirthdate(){ return birthdate; }
+    public String getBirthdate() {
+        return birthdate;
+    }
 
-    public void setBirthdate(String birthdate){ this.birthdate = birthdate; }
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
 
-    public String getUniversityName() { return universityName; }
+    public String getUniversityname() {
+        return universityname;
+    }
 
-    public void setUniversityName(String universityName) { this.universityName = universityName; }
+    public void setUniversityname(String universityname) {
+        this.universityname = universityname;
+    }
 
-    public String getEnteranceyear() { return enteranceyear; }
+    public String getAbilities() {
+        return abilities;
+    }
 
-    public void setEnteranceyear(String enteranceyear) { this.enteranceyear = enteranceyear; }
+    public void setAbilities(String abilities) {
+        this.abilities = abilities;
+    }
 
-    public String getWorkyear() { return workyear; }
+    public String getEntranceyear() {
+        return entranceyear;
+    }
 
-    public void setWorkyear(String workyear) { this.workyear = workyear; }
+    public void setEntranceyear(String entranceyear) {
+        this.entranceyear = entranceyear;
+    }
 
-    public String getDuty() { return duty; }
+    public String getYear() {
+        return year;
+    }
 
-    public void setDuty(String duty) { this.duty = duty; }
+    public void setYear(String year) {
+        this.year = year;
+    }
 
-    public String getPosition() { return position; }
+    public String getDuty() {
+        return duty;
+    }
 
-    public void setPosition(String position) { this.position = position; }
+    public void setDuty(String duty) {
+        this.duty = duty;
+    }
 
-    public String getProjectName() { return projectName; }
+    public String getPosition() {
+        return position;
+    }
 
-    public void setProjectName(String projectName) { this.projectName = projectName; }
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
-    public String getProjectDescription() { return projectDescription; }
+    public String getProjectname() {
+        return projectname;
+    }
 
-    public void setProjectDescription(String projectDescription) { this.projectDescription = projectDescription; }
+    public void setProjectname(String projectname) {
+        this.projectname = projectname;
+    }
+
+    public String getProjectdescription() {
+        return projectdescription;
+    }
+
+    public void setProjectdescription(String projectdescription) {
+        this.projectdescription = projectdescription;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
 }

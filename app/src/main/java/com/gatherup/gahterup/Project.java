@@ -51,7 +51,7 @@ public class Project extends AppCompatActivity {
     }
 
     public void project_createprojectgroup_click(View view) {
-        Intent intent = new Intent(this, CreateProject.class);
+        Intent intent = new Intent(this, CreateProject_Edit.class);
         startActivity(intent);
     }
 }

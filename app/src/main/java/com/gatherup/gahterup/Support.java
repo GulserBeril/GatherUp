@@ -33,7 +33,7 @@ public class Support extends AppCompatActivity {
                         startActivity(new Intent(Support.this, Notification.class));
                         break;
                     case R.id.navigation_profile:
-                        startActivity(new Intent(Support.this, Profile.class));
+                        startActivity(new Intent(Support.this, Profile_Edit.class));
                         break;
                 }
                 finish();

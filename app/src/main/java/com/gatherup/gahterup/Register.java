@@ -81,12 +81,12 @@ public class Register extends AppCompatActivity {
             return;
         }
 
-        if (!password.equals(passwordagain)){
+        if (!password.equals(passwordagain)) {
             Toast.makeText(getApplicationContext(), this.getString(R.string.password_match), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (!register_policy_checkbox.isChecked()){
+        if (!register_policy_checkbox.isChecked()) {
             register_register.setClickable(false);
             Toast.makeText(this, this.getString(R.string.accept_policy), Toast.LENGTH_SHORT).show();
         }
@@ -94,26 +94,30 @@ public class Register extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Map<String, String> map = new HashMap<>();
+                //Map<String, Object> mapobj = new HashMap<>();
                 map.put("name", "" + name);
                 map.put("surname", "" + surname);
                 map.put("email", "" + email);
                 map.put("password", "" + password);
                 map.put("birthdate", "");
-                map.put("universityName", "");
-                map.put("enteranceyear", "");
+                map.put("universityname", "");
+                map.put("entranceyear", "");
+                map.put("abilities", "");
+                //mapobj.put("abilities", "");
+                map.put("year", "");
                 map.put("duty", "");
                 map.put("position", "");
-                map.put("projectName", "");
-                map.put("projectDescription", "");
+                map.put("projectname", "");
+                map.put("projectdescription", "");
 
                 db.collection("users").document(auth.getCurrentUser().getUid().toString()).set(map);
-                Intent intent = new  Intent(getApplicationContext(), HomePage.class);
+                Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),"Kayıt İşlemi Başarısız",Toast.LENGTH_LONG).show();
+                Toast.makeText(Register.this, getApplicationContext().getString(R.string.failed_registration), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -27,15 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_profilepicture"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-
-                android:background="@drawable/profile"
-                android:clickable="true" />
+                android:src="@mipmap/profile_img" />
 
             <TextView
                 android:id="@+id/profile_personalinfo"
@@ -47,53 +45,77 @@
                 android:text="@string/personalinfo"
                 android:textColor="@color/Blue" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_personalinfo"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/name_" />
+
+            <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_personalinfo"
-                android:layout_centerHorizontal="true"
+                android:layout_alignStart="@id/profile_birthdate"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="11"
-                android:hint="@string/name"
-                android:inputType="textCapWords" />
+                android:layout_toEndOf="@id/profile_name_tv" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_surname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_name_tv"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/surname_" />
+
+            <TextView
                 android:id="@+id/profile_surname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_name"
-                android:layout_centerHorizontal="true"
+                android:layout_alignStart="@id/profile_birthdate"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="11"
-                android:hint="@string/surname"
-                android:inputType="textCapWords" />
+                android:layout_toEndOf="@id/profile_surname_tv" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_email_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_surname_tv"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/email_" />
+
+            <TextView
                 android:id="@+id/profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_surname"
-                android:layout_centerHorizontal="true"
+                android:layout_alignStart="@id/profile_birthdate"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="11"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
+                android:layout_toEndOf="@id/profile_email_tv" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_birthdate_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_email_tv"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/birthdate_" />
+
+            <TextView
                 android:id="@+id/profile_birthdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_email"
-                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="11"
-                android:hint="@string/birthdate"
-                android:inputType="date" />
+                android:layout_toEndOf="@id/profile_birthdate_tv" />
 
             <TextView
                 android:id="@+id/profile_educationalinfo"
@@ -105,29 +127,41 @@
                 android:text="@string/educationalinfo"
                 android:textColor="@color/Blue" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_universityname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_educationalinfo"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/universityname_" />
+
+            <TextView
                 android:id="@+id/profile_universityname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_educationalinfo"
-                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="11"
-                android:hint="@string/universityname"
-                android:inputType="textCapWords" />
+                android:layout_toEndOf="@id/profile_universityname_tv" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_entranceyear_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_universityname"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/entranceyear_" />
+
+            <TextView
                 android:id="@+id/profile_entranceyear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_universityname"
-                android:layout_centerHorizontal="true"
+                android:layout_alignStart="@id/profile_universityname"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="11"
-                android:hint="@string/entranceyear"
-                android:inputType="number" />
+                android:layout_toEndOf="@id/profile_entranceyear_tv" />
 
             <TextView
                 android:id="@+id/profile_abilities_interests"
@@ -139,177 +173,136 @@
                 android:text="@string/abilities_interest"
                 android:textColor="@color/Blue" />
 
-            <EditText
-                android:id="@+id/profile_combo"
+            <TextView
+                android:id="@+id/profile_abilities_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_abilities_interests"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="3"
-                android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/drop_down"
-                android:ems="10"
-                android:inputType="textCapWords" />
-
-            <Button
-                android:id="@+id/profile_addmore_abilities"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignTop="@id/profile_combo"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/profile_combo"
-                android:background="@drawable/circle"
-                android:text="@string/plus" />
-
-            <TextView
-                android:id="@+id/profile_addmore1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/profile_combo"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/profile_addmore_abilities"
-                android:text="@string/addmore"
-                android:textColor="@color/Black" />
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/profile_experiences"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_addmore1"
+                android:layout_below="@id/profile_abilities_list"
                 android:layout_alignStart="@id/profile_personalinfo"
                 android:layout_marginTop="30dp"
                 android:text="@string/experiences"
                 android:textColor="@color/Blue" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_year_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_experiences"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/year_" />
+
+            <TextView
                 android:id="@+id/profile_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_experiences"
-                android:layout_marginStart="20dp"
+                android:layout_alignStart="@id/profile_position"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="4"
-                android:hint="@string/year"
-                android:inputType="date" />
+                android:layout_toEndOf="@id/profile_year_tv" />
 
             <TextView
-                android:id="@+id/profile_slash1"
+                android:id="@+id/profile_duty_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_experiences"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@id/profile_year"
-                android:text="@string/slash"
-                android:textSize="25sp" />
+                android:layout_below="@id/profile_year"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/duty_" />
 
-            <EditText
+            <TextView
                 android:id="@+id/profile_duty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_experiences"
-                android:layout_alignTop="@id/profile_year"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/profile_slash1"
-                android:background="@drawable/rectangle"
-                android:ems="4"
-                android:hint="@string/duty"
-                android:inputType="textCapWords" />
+                android:layout_below="@id/profile_year"
+                android:layout_alignStart="@id/profile_position"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/profile_duty_tv" />
 
             <TextView
-                android:id="@+id/profile_slash2"
+                android:id="@+id/profile_position_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_experiences"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@id/profile_duty"
-                android:text="@string/slash"
-                android:textSize="25sp" />
+                android:layout_below="@id/profile_duty"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/position_" />
 
-            <EditText
+            <TextView
                 android:id="@+id/profile_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_experiences"
-                android:layout_alignTop="@id/profile_year"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/profile_slash2"
-                android:background="@drawable/rectangle"
-                android:ems="4"
-                android:hint="@string/position"
-                android:inputType="textCapWords" />
+                android:layout_below="@id/profile_duty"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/profile_position_tv" />
 
             <TextView
                 android:id="@+id/profile_projects"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_year"
+                android:layout_below="@id/profile_position"
                 android:layout_alignStart="@id/profile_personalinfo"
                 android:layout_marginTop="30dp"
                 android:text="@string/projects"
                 android:textColor="@color/Blue" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_projectname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_projects"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/projectname_" />
+
+            <TextView
                 android:id="@+id/profile_projectname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_projects"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="6"
-                android:hint="@string/projectname"
-                android:inputType="textCapWords" />
+                android:layout_toEndOf="@id/profile_projectname_tv" />
 
-            <EditText
+            <TextView
+                android:id="@+id/profile_description_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_projectname"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/description_" />
+
+            <TextView
                 android:id="@+id/profile_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_projects"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@id/profile_projectname"
-                android:background="@drawable/rectangle"
-                android:ems="9"
-                android:hint="@string/description"
-                android:inputType="textMultiLine" />
-
-            <Button
-                android:id="@+id/profile_addmore_projects"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_below="@id/profile_description"
+                android:layout_below="@id/profile_projectname"
                 android:layout_alignStart="@id/profile_projectname"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/circle"
-                android:text="@string/plus" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_toEndOf="@id/profile_description_tv" />
 
-            <TextView
-                android:id="@+id/profile_addmore2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/profile_addmore_projects"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/profile_addmore_projects"
-                android:text="@string/addmore"
-                android:textColor="@color/Black" />
 
             <Button
-                android:id="@+id/profile_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/profile_addmore_projects"
-                android:layout_centerHorizontal="true"
-                android:onClick="profile_save_click"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/round"
-                android:text="@string/save" />
+                android:id="@+id/profile_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit"
+                android:onClick="profile_edit_click" />
 
         </RelativeLayout>
     </ScrollView>

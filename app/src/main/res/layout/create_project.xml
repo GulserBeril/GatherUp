@@ -27,92 +27,85 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/create_project_decidename"
+                android:id="@+id/create_project_projectname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/projectname_"
+                android:textColor="@color/Black" />
+
+            <TextView
+                android:id="@+id/create_project_projectname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:text="@string/decidename"
-                android:textColor="@color/Black" />
+                android:layout_toEndOf="@id/create_project_projectname_tv"
+                android:singleLine="false" />
 
-            <EditText
-                android:id="@+id/create_project_projectname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_decidename"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="10"
-                android:hint="@string/projectname"
-                android:inputType="textCapWords" />
 
             <TextView
-                android:id="@+id/create_project_howmany_tv"
+                android:id="@+id/create_project_numberofpeople_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_projectname"
-                android:layout_alignStart="@id/create_project_decidename"
-                android:layout_marginTop="30dp"
-                android:text="@string/howmanypeople"
+                android:layout_below="@id/create_project_projectname_tv"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/numberofpeople_"
                 android:textColor="@color/Black" />
 
-            <EditText
+            <TextView
                 android:id="@+id/create_project_howmany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_howmany_tv"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@id/create_project_projectname_tv"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/drop_down"
-                android:ems="10"
-                android:inputType="textCapWords"
-                android:onClick="create_project_howmany_click" />
+                android:layout_toEndOf="@id/create_project_numberofpeople_tv"
+                android:singleLine="false" />
+
 
             <TextView
-                android:id="@+id/create_project_projectdescription_tv"
+                android:id="@+id/create_project_description_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_howmany"
-                android:layout_alignStart="@id/create_project_decidename"
-                android:layout_marginTop="30dp"
-                android:text="@string/projectdescription"
+                android:layout_below="@id/create_project_numberofpeople_tv"
+                android:layout_alignStart="@id/create_project_projectname_tv"
+                android:layout_marginTop="20dp"
+                android:text="@string/description_"
                 android:textColor="@color/Black" />
 
-            <EditText
+            <TextView
                 android:id="@+id/create_project_projectdescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_projectdescription_tv"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@id/create_project_numberofpeople_tv"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:ems="10"
-                android:inputType="textMultiLine|textCapWords" />
+                android:layout_toEndOf="@id/create_project_description_tv"
+                android:singleLine="false" />
+
 
             <TextView
-                android:id="@+id/create_project_projectneeds_tv"
+                android:id="@+id/create_project_needs_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_projectdescription"
-                android:layout_alignStart="@id/create_project_decidename"
-                android:layout_marginTop="30dp"
-                android:text="@string/projectneeds"
+                android:layout_below="@id/create_project_description_tv"
+                android:layout_alignStart="@id/create_project_projectname_tv"
+                android:layout_marginTop="20dp"
+                android:text="@string/projectneeds_"
                 android:textColor="@color/Black" />
 
-            <EditText
+            <TextView
                 android:id="@+id/create_project_projectneeds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_projectneeds_tv"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@id/create_project_description_tv"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/drop_down"
-                android:ems="10"
-                android:hint="@string/search"
-                android:inputType="textCapWords" />
+                android:layout_toEndOf="@id/create_project_needs_tv"
+                android:singleLine="false" />
 
             <TextView
                 android:id="@+id/create_project_onlymanager"
@@ -151,15 +144,13 @@
                 android:layout_toEndOf="@id/create_project_everymember" />
 
             <Button
-                android:id="@+id/create_project_create"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_everymember"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/round"
-                android:text="@string/create" />
+                android:id="@+id/create_project_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edit"
+                android:onClick="create_project_edit_click" />
 
         </RelativeLayout>
     </ScrollView>

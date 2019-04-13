@@ -1,49 +1,50 @@
 package com.gatherup.gahterup;
+
 import android.content.Intent;
-import android.provider.Telephony;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListPopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Text;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Profile extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
-    EditText profile_combo;
-    ListPopupWindow profile_lpw;
-    String[] profile_list;
+public class Profile extends AppCompatActivity {
+
     BottomNavigationView profile_navigation;
-    Button profile_back, profile_addmore_abilities, profile_addmore_projects, profile_save;
-    ImageView profile_profilepicture;
-    EditText profile_name, profile_surname, profile_email, profile_birthdate, profile_universityname, profile_entranceyear, profile_year, profile_duty, profile_position, profile_projectname, profile_description;
+    Button profile_back, profile_edit;
+    CircleImageView profile_profilepicture;
+    TextView profile_name, profile_surname, profile_email, profile_birthdate, profile_universityname, profile_entranceyear, profile_year, profile_duty, profile_position, profile_projectname, profile_description, profile_abilities_list;
+
 
     FirebaseAuth auth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db;
+    private FirebaseStorage storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         profile_navigation = findViewById(R.id.profile_navigation);
-        profile_combo = findViewById(R.id.profile_combo);
         profile_back = findViewById(R.id.profile_back);
-        profile_addmore_abilities = findViewById(R.id.profile_addmore_abilities);
-        profile_addmore_projects = findViewById(R.id.profile_addmore_projects);
-        profile_save = findViewById(R.id.profile_save);
+        profile_edit = findViewById(R.id.profile_edit);
         profile_profilepicture = findViewById(R.id.profile_profilepicture);
         profile_name = findViewById(R.id.profile_name);
         profile_surname = findViewById(R.id.profile_surname);
@@ -56,18 +57,73 @@ public class Profile extends AppCompatActivity implements View.OnTouchListener, 
         profile_position = findViewById(R.id.profile_position);
         profile_projectname = findViewById(R.id.profile_projectname);
         profile_description = findViewById(R.id.profile_description);
+        profile_abilities_list = findViewById(R.id.profile_abilities_list);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance();
 
-        profile_combo.setOnTouchListener(this);
 
-        profile_list = new String[]{"Java", "Python", "Php", "SQL"};
-        profile_lpw = new ListPopupWindow(this);
-        profile_lpw.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, profile_list));
-        profile_lpw.setAnchorView(profile_combo);
-        profile_lpw.setModal(true);
-        profile_lpw.setOnItemClickListener(this);
+
+        DocumentReference ref = db.collection("users").document(auth.getCurrentUser().getUid().toString());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        String name = task.getResult().getData().get("name").toString();
+                        String surname = task.getResult().getData().get("surname").toString();
+                        String email = task.getResult().getData().get("email").toString();
+                        String birthdate = task.getResult().getData().get("birthdate").toString();
+                        String universityname = task.getResult().getData().get("universityname").toString();
+                        String entranceyear = task.getResult().getData().get("entranceyear").toString();
+                        String abilities_list = task.getResult().getData().get("abilities").toString();
+                        String year = task.getResult().getData().get("year").toString();
+                        String duty = task.getResult().getData().get("duty").toString();
+                        String position = task.getResult().getData().get("position").toString();
+                        String projectname = task.getResult().getData().get("projectname").toString();
+                        String description = task.getResult().getData().get("projectdescription").toString();
+                        profile_name.setText(name);
+                        profile_surname.setText(surname);
+                        profile_email.setText(email);
+                        profile_birthdate.setText(birthdate);
+                        profile_universityname.setText(universityname);
+                        profile_entranceyear.setText(entranceyear);
+                        profile_abilities_list.setText(abilities_list);
+                        profile_year.setText(year);
+                        profile_duty.setText(duty);
+                        profile_position.setText(position);
+                        profile_projectname.setText(projectname);
+                        profile_description.setText(description);
+                    } else {
+                        Toast.makeText(Profile.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } else {
+                    Toast.makeText(Profile.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+            }
+        });
+
+        String pp = auth.getCurrentUser().getUid().toString();
+        StorageReference storageReference1 = storageReference.getReference().child(pp);
+
+        storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(Profile.this).load(uri).into(profile_profilepicture);
+            }
+        });
+/*
+        profile_profilepicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
 
         profile_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -95,54 +151,12 @@ public class Profile extends AppCompatActivity implements View.OnTouchListener, 
         });
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String item = profile_list[position];
-        profile_combo.setText(item);
-        profile_lpw.dismiss();
+    public void profile_back_click(View view) {
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        final int DRAWABLE_RIGHT = 2;
-
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (event.getX() >= (v.getWidth() - ((EditText) v)
-                    .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                profile_lpw.show();
-                return true;
-            }
-        }
-        return false;
-    }
-    public  void  profile_back_click(View view){
-        super.onBackPressed();
+    public void profile_edit_click(View view) {
+        Intent intent = new Intent(Profile.this, Profile_Edit.class);
+        startActivity(intent);
     }
 
-    public void profile_save_click(View view) {
-
-        final String name = profile_name.getText().toString();
-        final String surname = profile_surname.getText().toString();
-        final String email = profile_email.getText().toString();
-        final String birthdate =profile_birthdate.getText().toString();
-        final String universityname = profile_universityname.getText().toString();
-        final String enteranceyear = profile_entranceyear.getText().toString();
-        final String workyear=  profile_year.getText().toString();
-        final String duty = profile_duty.getText().toString();
-        final String position = profile_position.getText().toString();
-        final String projectName = profile_projectname.getText().toString();
-        final String projectDescription = profile_description.getText().toString();
-
-
-
-            db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("birthdate",birthdate);
-
-            db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("universityName", universityname);
-
-            Intent intent = new Intent(this,Project.class);
-            startActivity(intent);
-
-
-
-    }
 }

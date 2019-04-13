@@ -14,12 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.Switch;
+import android.widget.TextView;
 
 public class CreateProject extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
     BottomNavigationView create_project_navigation;
-    EditText create_project_projectname, create_project_howmany, create_project_projectdescription, create_project_projectneeds;
+    TextView create_project_projectname, create_project_howmany, create_project_projectdescription, create_project_projectneeds;
     Switch create_project_onlymanager_switch, create_project_everymember_switch;
-    Button create_project_create;
     ListPopupWindow create_project_lpw;
     String[] create_project_list;
 
@@ -34,7 +34,6 @@ public class CreateProject extends AppCompatActivity implements View.OnTouchList
         create_project_projectneeds = findViewById(R.id.create_project_projectneeds);
         create_project_onlymanager_switch = findViewById(R.id.create_project_onlymanager_switch);
         create_project_everymember_switch = findViewById(R.id.create_project_everymember_switch);
-        create_project_create = findViewById(R.id.create_project_create);
 
         create_project_howmany.setOnTouchListener(this);
 
@@ -73,10 +72,6 @@ public class CreateProject extends AppCompatActivity implements View.OnTouchList
         });
     }
 
-    public void create_project_howmany_click(View view){
-
-    }
-
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -93,11 +88,15 @@ public class CreateProject extends AppCompatActivity implements View.OnTouchList
     }
 
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String item = create_project_list[position];
         create_project_howmany.setText(item);
         create_project_lpw.dismiss();
+    }
+
+    public void create_project_edit_click(View view) {
+        Intent intent = new Intent(CreateProject.this, CreateProject_Edit.class);
+        startActivity(intent);
     }
 }

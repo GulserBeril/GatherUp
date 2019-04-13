@@ -32,7 +32,7 @@ public class Search extends AppCompatActivity {
                         startActivity(new Intent(Search.this, Notification.class));
                         break;
                     case R.id.navigation_profile:
-                        startActivity(new Intent(Search.this, Profile.class));
+                        startActivity(new Intent(Search.this, Profile_Edit.class));
                         break;
                 }
                 finish();

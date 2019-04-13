@@ -70,7 +70,7 @@
     <string name="abilities_interest">Abilities/Interests</string>
     <string name="requiredfields">All fields are required</string>
     <string name="EN_selected">English Selected</string>
-    <string name="TR_selected">Turkish Selected</string>
+    <string name="TR_selected">Türkçe Seçildi</string>
     <string name="success_registration">Registration is successful</string>
     <string name="failed_registration">Registration failed</string>
     <string name="enter_name">Enter name</string>
@@ -80,4 +80,17 @@
     <string name="authentication_failed">Authentication failed</string>
     <string name="password_match">Both password fields must be identical</string>
     <string name="accept_policy">You have not accepted the policy terms</string>
+    <string name="failed">Failed</string>
+    <string name="name_">Name :</string>
+    <string name="surname_">Surname :</string>
+    <string name="birthdate_">Birth Date :</string>
+    <string name="universityname_">University Name :</string>
+    <string name="entranceyear_">Entrance Year :</string>
+    <string name="year_">Year :</string>
+    <string name="duty_">Duty :</string>
+    <string name="position_">Position :</string>
+    <string name="projectname_">Project Name :</string>
+    <string name="description_">Description :</string>
+    <string name="numberofpeople_">Number of People :</string>
+    <string name="projectneeds_">Project Needs :</string>
 </resources>
