@@ -93,6 +93,7 @@ public class CreateProject extends AppCompatActivity implements View.OnTouchList
         String item = create_project_list[position];
         create_project_howmany.setText(item);
         create_project_lpw.dismiss();
+
     }
 
     public void create_project_edit_click(View view) {
