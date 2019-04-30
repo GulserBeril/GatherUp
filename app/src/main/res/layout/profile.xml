@@ -6,22 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
-    <Button
-        android:id="@+id/profile_back"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/back"
-        android:onClick="profile_back_click"
-        android:textAllCaps="false" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Blue"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
 
     <ScrollView
         android:id="@+id/profile_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/profile_navigation"
-        android:layout_below="@id/profile_back">
+        android:layout_below="@id/bar">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -295,14 +302,14 @@
                 android:layout_toEndOf="@id/profile_description_tv" />
 
 
-            <Button
+            <!--<Button
                 android:id="@+id/profile_edit"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edit"
-                android:onClick="profile_edit_click" />
+                android:onClick="profile_edit_click" />-->
 
         </RelativeLayout>
     </ScrollView>

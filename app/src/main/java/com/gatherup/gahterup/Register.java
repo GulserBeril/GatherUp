@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class Register extends AppCompatActivity {
     FirebaseAuth auth;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<String> abilitieslist = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +95,8 @@ public class Register extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Map<String, String> map = new HashMap<>();
-                //Map<String, Object> mapobj = new HashMap<>();
+                Map<String, Object> map = new HashMap<>();
+
                 map.put("name", "" + name);
                 map.put("surname", "" + surname);
                 map.put("email", "" + email);
@@ -103,7 +105,6 @@ public class Register extends AppCompatActivity {
                 map.put("universityname", "");
                 map.put("entranceyear", "");
                 map.put("abilities", "");
-                //mapobj.put("abilities", "");
                 map.put("year", "");
                 map.put("duty", "");
                 map.put("position", "");

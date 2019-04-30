@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +16,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateProject_Edit extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
     BottomNavigationView create_project_edit_navigation;
@@ -22,6 +36,11 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
     Button create_project_edit_create;
     ListPopupWindow create_project_edit_lpw;
     String[] create_project_edit_list;
+
+    FirebaseAuth auth;
+
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +64,7 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
         create_project_edit_lpw.setAnchorView(create_project_edit_howmany);
         create_project_edit_lpw.setModal(true);
         create_project_edit_lpw.setOnItemClickListener(this);
+        auth = FirebaseAuth.getInstance();
 
 
         create_project_edit_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -101,8 +121,55 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
     }
 
     public void create_project_edit_save_click(View view) {
-        Intent intent = new Intent(CreateProject_Edit.this, CreateProject.class);
-        startActivity(intent);
+        final String projectName = create_project_edit_projectname.getText().toString();
+        final String participant = create_project_edit_howmany.getText().toString();
+        final String projectDescription = create_project_edit_projectdescription.getText().toString();
+        final String projectNeeds = create_project_edit_projectneeds.getText().toString();
+
+        if(TextUtils.isEmpty(projectName)){
+            Toast.makeText(getApplicationContext(),"Enter the project name",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(participant)){
+            Toast.makeText(getApplicationContext(),"The number of participant is too short, minimum 2 !",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(projectDescription)){
+            Toast.makeText(getApplicationContext(),"Enter the project description",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(projectNeeds)){
+            Toast.makeText(getApplicationContext(),"Enter the project needs",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        Map<String,String> project_map = new HashMap<>();
+        project_map.put("description",projectDescription);
+        project_map.put("number of people",participant);
+        project_map.put("project name",projectName);
+        project_map.put("project needs",projectNeeds);
+
+        db.collection("projects").add(project_map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(CreateProject_Edit.this,"Add into the Firestore",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), CreateProject.class);
+                startActivity(intent);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String error =e.getMessage();
+                Toast.makeText(CreateProject_Edit.this,"Error :" + error,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
 
     }
 }

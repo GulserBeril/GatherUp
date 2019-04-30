@@ -7,11 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Toast;;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,12 +27,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile extends AppCompatActivity {
 
     BottomNavigationView profile_navigation;
-    Button profile_back, profile_edit;
     CircleImageView profile_profilepicture;
     TextView profile_name, profile_surname, profile_email, profile_birthdate, profile_universityname, profile_entranceyear, profile_year, profile_duty, profile_position, profile_projectname, profile_description, profile_abilities_list;
 
@@ -42,9 +46,20 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Profile.this, HomePage.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
+
         profile_navigation = findViewById(R.id.profile_navigation);
-        profile_back = findViewById(R.id.profile_back);
-        profile_edit = findViewById(R.id.profile_edit);
+
         profile_profilepicture = findViewById(R.id.profile_profilepicture);
         profile_name = findViewById(R.id.profile_name);
         profile_surname = findViewById(R.id.profile_surname);
@@ -64,7 +79,6 @@ public class Profile extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance();
 
 
-
         DocumentReference ref = db.collection("users").document(auth.getCurrentUser().getUid().toString());
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -78,7 +92,7 @@ public class Profile extends AppCompatActivity {
                         String birthdate = task.getResult().getData().get("birthdate").toString();
                         String universityname = task.getResult().getData().get("universityname").toString();
                         String entranceyear = task.getResult().getData().get("entranceyear").toString();
-                        String abilities_list = task.getResult().getData().get("abilities").toString();
+                        ArrayList<String> abilities_list = (ArrayList<String>) document.get("abilities");
                         String year = task.getResult().getData().get("year").toString();
                         String duty = task.getResult().getData().get("duty").toString();
                         String position = task.getResult().getData().get("position").toString();
@@ -90,12 +104,17 @@ public class Profile extends AppCompatActivity {
                         profile_birthdate.setText(birthdate);
                         profile_universityname.setText(universityname);
                         profile_entranceyear.setText(entranceyear);
-                        profile_abilities_list.setText(abilities_list);
+                        //profile_abilities_list.setText(abilities_list);
                         profile_year.setText(year);
                         profile_duty.setText(duty);
                         profile_position.setText(position);
                         profile_projectname.setText(projectname);
                         profile_description.setText(description);
+
+                        for (int i = 0; i < abilities_list.size(); i++) {
+                            profile_abilities_list.setText(profile_abilities_list.getText()+ "\n" + abilities_list.get(i) + "\n");
+                        }
+
                     } else {
                         Toast.makeText(Profile.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         return;
@@ -151,12 +170,30 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    public void profile_back_click(View view) {
+    /*
+        public void profile_edit_click(View view) {
+            Intent intent = new Intent(Profile.this, Profile_Edit.class);
+            startActivity(intent);
+        }
+    */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 
-    public void profile_edit_click(View view) {
-        Intent intent = new Intent(Profile.this, Profile_Edit.class);
-        startActivity(intent);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Profile.this, Login.class));
+                return true;
+            case R.id.edit:
+                Intent intent = new Intent(Profile.this, Profile_Edit.class);
+                startActivity(intent);
+                return true;
+        }
+        return false;
     }
-
 }

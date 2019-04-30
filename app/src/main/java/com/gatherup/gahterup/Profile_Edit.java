@@ -32,11 +32,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,6 +52,8 @@ public class Profile_Edit extends AppCompatActivity {
     TextView profile_edit_abilities_list;
 
     User user;
+
+    //ArrayList<String> abilitieslist = new ArrayList<String>();
 
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -107,7 +112,7 @@ public class Profile_Edit extends AppCompatActivity {
                         String birthdate = task.getResult().getData().get("birthdate").toString();
                         String universityname = task.getResult().getData().get("universityname").toString();
                         String entranceyear = task.getResult().getData().get("entranceyear").toString();
-                        String abilities_list = task.getResult().getData().get("abilities").toString();
+                        ArrayList<String> abilities_list = (ArrayList<String>) document.get("abilities");
                         String year = task.getResult().getData().get("year").toString();
                         String duty = task.getResult().getData().get("duty").toString();
                         String position = task.getResult().getData().get("position").toString();
@@ -119,12 +124,15 @@ public class Profile_Edit extends AppCompatActivity {
                         profile_edit_birthdate.setText(birthdate);
                         profile_edit_universityname.setText(universityname);
                         profile_edit_entranceyear.setText(entranceyear);
-                        profile_edit_abilities_list.setText(abilities_list);
                         profile_edit_year.setText(year);
                         profile_edit_duty.setText(duty);
                         profile_edit_position.setText(position);
                         profile_edit_projectname.setText(projectname);
                         profile_edit_description.setText(description);
+
+                        for (int i = 0; i < abilities_list.size(); i++) {
+                            profile_edit_abilities_list.setText(profile_edit_abilities_list.getText() + "\n" + abilities_list.get(i) + "\n");
+                        }
                     } else {
                         Toast.makeText(Profile_Edit.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                     }
@@ -133,7 +141,6 @@ public class Profile_Edit extends AppCompatActivity {
                 }
             }
         });
-
 
         profile_edit_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -173,7 +180,7 @@ public class Profile_Edit extends AppCompatActivity {
         final String birthdate = profile_edit_birthdate.getText().toString();
         final String universityname = profile_edit_universityname.getText().toString();
         final String entranceyear = profile_edit_entranceyear.getText().toString();
-        final String abilities = profile_edit_abilities_list.getText().toString();
+        // final String abilities = profile_edit_abilities_list.getText().toString();
         final String year = profile_edit_year.getText().toString();
         final String duty = profile_edit_duty.getText().toString();
         final String position = profile_edit_position.getText().toString();
@@ -186,7 +193,7 @@ public class Profile_Edit extends AppCompatActivity {
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("birthdate", birthdate);
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("universityname", universityname);
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("entranceyear", entranceyear);
-        db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("abilities", abilities);
+        //db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("abilities", abilitieslist);
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("year", year);
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("duty", duty);
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("position", position);
@@ -236,10 +243,29 @@ public class Profile_Edit extends AppCompatActivity {
     }
 
     public void profile_edit_abilities_click(View view) {
+
         String abilities = profile_edit_combo.getText().toString();
         String text = profile_edit_abilities_list.getText().toString();
         text = text + "\n" + abilities;
         profile_edit_abilities_list.setText(text);
-        return;
+
+        db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("abilities", FieldValue.arrayUnion(abilities));
+
+        /*
+        DocumentReference reflist = db.collection("users").document(auth.getCurrentUser().getUid().toString());
+        reflist.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    ArrayList<String> abilities_list = new ArrayList<String>();
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                    }
+                }
+            }
+        });
+
+        abilitieslist.add(abilities);
+        */
     }
 }

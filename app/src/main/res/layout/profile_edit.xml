@@ -156,9 +156,9 @@
                 android:layout_below="@id/profile_edit_abilities_interests"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:onClick="profile_edit_abilities_click"
                 android:layout_toEndOf="@id/profile_edit_combo"
                 android:background="@drawable/round"
+                android:onClick="profile_edit_abilities_click"
                 android:text="@string/addmore" />
 
             <TextView
@@ -169,7 +169,6 @@
                 android:layout_alignStart="@id/profile_edit_combo"
                 android:layout_marginTop="5dp"
                 android:singleLine="false" />
-
 
             <TextView
                 android:id="@+id/profile_edit_experiences"
