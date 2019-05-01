@@ -25,6 +25,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Register"
+            android:parentActivityName=".HomePage"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Project"
@@ -52,9 +53,11 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ForgotPassword"
+            android:parentActivityName=".Login"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Login"
+            android:parentActivityName=".HomePage"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -38,9 +38,7 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
     String[] create_project_edit_list;
 
     FirebaseAuth auth;
-
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +62,9 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
         create_project_edit_lpw.setAnchorView(create_project_edit_howmany);
         create_project_edit_lpw.setModal(true);
         create_project_edit_lpw.setOnItemClickListener(this);
+
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
 
         create_project_edit_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -121,55 +121,35 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
     }
 
     public void create_project_edit_save_click(View view) {
-        final String projectName = create_project_edit_projectname.getText().toString();
-        final String participant = create_project_edit_howmany.getText().toString();
-        final String projectDescription = create_project_edit_projectdescription.getText().toString();
-        final String projectNeeds = create_project_edit_projectneeds.getText().toString();
+        final String projectname = create_project_edit_projectname.getText().toString();
+        final String numberofparticipant = create_project_edit_howmany.getText().toString();
+        final String projectdescription = create_project_edit_projectdescription.getText().toString();
+        final String projectneeds = create_project_edit_projectneeds.getText().toString();
 
-        if(TextUtils.isEmpty(projectName)){
-            Toast.makeText(getApplicationContext(),"Enter the project name",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(projectname)) {
+            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterprojectname), Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(participant)){
-            Toast.makeText(getApplicationContext(),"The number of participant is too short, minimum 2 !",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(numberofparticipant)) {
+            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterparticipant), Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(projectDescription)){
-            Toast.makeText(getApplicationContext(),"Enter the project description",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(projectdescription)) {
+            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterprojectdescription), Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(projectNeeds)){
-            Toast.makeText(getApplicationContext(),"Enter the project needs",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(projectneeds)) {
+            Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterprojectneeds), Toast.LENGTH_SHORT).show();
             return;
         }
 
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectname", projectname);
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("numberofparticipant", numberofparticipant);
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectdescription", projectdescription);
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", projectneeds);
 
-        Map<String,String> project_map = new HashMap<>();
-        project_map.put("description",projectDescription);
-        project_map.put("number of people",participant);
-        project_map.put("project name",projectName);
-        project_map.put("project needs",projectNeeds);
-
-        db.collection("projects").add(project_map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(CreateProject_Edit.this,"Add into the Firestore",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), CreateProject.class);
-                startActivity(intent);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String error =e.getMessage();
-                Toast.makeText(CreateProject_Edit.this,"Error :" + error,Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-
-
-
+        Intent intent = new Intent(getApplicationContext(), CreateProject.class);
+        startActivity(intent);
 
     }
 }

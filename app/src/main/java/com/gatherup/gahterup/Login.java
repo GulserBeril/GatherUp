@@ -52,11 +52,10 @@ public class Login extends AppCompatActivity {
         super.onStart();
 /*
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null){
+        if (firebaseUser != null) {
             Intent intent = new Intent(Login.this, HomePage.class);
             startActivity(intent);
-        }else
-        {
+        } else {
             Intent intent = new Intent(Login.this, Login.class);
             startActivity(intent);
         }*/

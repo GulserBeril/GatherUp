@@ -93,4 +93,10 @@
     <string name="description_">Description :</string>
     <string name="numberofpeople_">Number of People :</string>
     <string name="projectneeds_">Project Needs :</string>
+    <string name="enterprojectname">Enter the project name</string>
+    <string name="enterparticipant">Enter the number of participants</string>
+    <string name="enterprojectdescription">Enter the project description</string>
+    <string name="enterprojectneeds">Enter the project needs</string>
+    <string name="error_">Error :</string>
+    <string name="checkemail">Check your email</string>
 </resources>

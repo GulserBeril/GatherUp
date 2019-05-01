@@ -94,4 +94,10 @@
     <string name="TR_selected">Türkçe Seçildi</string>
     <string name="numberofpeople_">Kişi Sayısı :</string>
     <string name="projectneeds_">Proje İhtiyaçları :</string>
+    <string name="enterprojectname">Proje adını girin</string>
+    <string name="enterprojectneeds">Proje ihtiyaçlarını girin</string>
+    <string name="enterprojectdescription">Proje açıklamasını girin</string>
+    <string name="enterparticipant">Katılımcı sayısını girin</string>
+    <string name="error_">Hata :</string>
+    <string name="checkemail">E-postanı kontrol et</string>
 </resources>

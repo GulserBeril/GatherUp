@@ -15,13 +15,24 @@ import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class CreateProject extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+
+public class CreateProject extends AppCompatActivity {
     BottomNavigationView create_project_navigation;
     TextView create_project_projectname, create_project_howmany, create_project_projectdescription, create_project_projectneeds;
     Switch create_project_onlymanager_switch, create_project_everymember_switch;
-    ListPopupWindow create_project_lpw;
-    String[] create_project_list;
+
+    FirebaseAuth auth;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +46,37 @@ public class CreateProject extends AppCompatActivity implements View.OnTouchList
         create_project_onlymanager_switch = findViewById(R.id.create_project_onlymanager_switch);
         create_project_everymember_switch = findViewById(R.id.create_project_everymember_switch);
 
-        create_project_howmany.setOnTouchListener(this);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        create_project_list = new String[]{"1", "2", "3", "4"};
-        create_project_lpw = new ListPopupWindow(this);
-        create_project_lpw.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, create_project_list));
-        create_project_lpw.setAnchorView(create_project_howmany);
-        create_project_lpw.setModal(true);
-        create_project_lpw.setOnItemClickListener(this);
+        DocumentReference ref = db.collection("projects").document(auth.getCurrentUser().getUid().toString());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        String projectname = task.getResult().getData().get("projectname").toString();
+                        String numberofparticipant = task.getResult().getData().get("numberofparticipant").toString();
+                        String projectdescription = task.getResult().getData().get("projectdescription").toString();
+                        String projectneeds = task.getResult().getData().get("projectneeds").toString();
 
+                        create_project_projectname.setText(projectname);
+                        create_project_howmany.setText(numberofparticipant);
+                        create_project_projectdescription.setText(projectdescription);
+                        create_project_projectneeds.setText(projectneeds);
+
+                    } else {
+                        Toast.makeText(CreateProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } else {
+                    Toast.makeText(CreateProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+            }
+        });
 
         create_project_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -70,30 +102,6 @@ public class CreateProject extends AppCompatActivity implements View.OnTouchList
                 return true;
             }
         });
-    }
-
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        final int DRAWABLE_RIGHT = 2;
-
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (event.getX() >= (v.getWidth() - ((EditText) v)
-                    .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                create_project_lpw.show();
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String item = create_project_list[position];
-        create_project_howmany.setText(item);
-        create_project_lpw.dismiss();
-
     }
 
     public void create_project_edit_click(View view) {

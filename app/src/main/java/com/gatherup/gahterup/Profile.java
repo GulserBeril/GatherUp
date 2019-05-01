@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,7 +37,6 @@ public class Profile extends AppCompatActivity {
     BottomNavigationView profile_navigation;
     CircleImageView profile_profilepicture;
     TextView profile_name, profile_surname, profile_email, profile_birthdate, profile_universityname, profile_entranceyear, profile_year, profile_duty, profile_position, profile_projectname, profile_description, profile_abilities_list;
-
 
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -92,6 +92,7 @@ public class Profile extends AppCompatActivity {
                         String birthdate = task.getResult().getData().get("birthdate").toString();
                         String universityname = task.getResult().getData().get("universityname").toString();
                         String entranceyear = task.getResult().getData().get("entranceyear").toString();
+
                         ArrayList<String> abilities_list = (ArrayList<String>) document.get("abilities");
                         String year = task.getResult().getData().get("year").toString();
                         String duty = task.getResult().getData().get("duty").toString();

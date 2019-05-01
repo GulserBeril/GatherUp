@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -33,7 +34,6 @@ public class Register extends AppCompatActivity {
     FirebaseAuth auth;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<String> abilitieslist = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,7 @@ public class Register extends AppCompatActivity {
                 map.put("birthdate", "");
                 map.put("universityname", "");
                 map.put("entranceyear", "");
-                map.put("abilities", "");
+                map.put("abilities", FieldValue.arrayUnion());
                 map.put("year", "");
                 map.put("duty", "");
                 map.put("position", "");
@@ -114,10 +114,10 @@ public class Register extends AppCompatActivity {
                 db.collection("users").document(auth.getCurrentUser().getUid().toString()).set(map);
 
                 Map<String, String> map2 = new HashMap<>();
-                map2.put("project name", "");
-                map2.put("number of people", "");
-                map2.put("description","");
-                map2.put("project needs","");
+                map2.put("projectname", "");
+                map2.put("numberofparticipant", "");
+                map2.put("projectdescription", "");
+                map2.put("projectneeds", "");
 
                 db.collection("projects").document(auth.getCurrentUser().getUid().toString()).set(map2);
 

@@ -15,99 +15,111 @@
         android:onClick="register_back_click"
         android:textAllCaps="false" />
 
-    <ImageView
-        android:id="@+id/register_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+    <ScrollView
+        android:id="@+id/register_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/register_back">
 
-    <EditText
-        android:id="@+id/register_name"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/register_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rectangle"
-        android:ems="11"
-        android:hint="@string/name"
-        android:inputType="textCapWords" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/register_surname"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/register_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle"
-        android:ems="11"
-        android:hint="@string/surname"
-        android:inputType="textCapWords" />
+            <ImageView
+                android:id="@+id/register_logo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp" />
 
-    <EditText
-        android:id="@+id/register_email"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/register_surname"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle"
-        android:ems="11"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/register_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/register_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rectangle"
+                android:ems="11"
+                android:hint="@string/name"
+                android:inputType="textCapWords" />
 
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/register_email"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle"
-        android:ems="11"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/register_surname"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/register_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle"
+                android:ems="11"
+                android:hint="@string/surname"
+                android:inputType="textCapWords" />
 
-    <EditText
-        android:id="@+id/register_passwordagain"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/register_password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle"
-        android:ems="11"
-        android:hint="@string/passwordagain"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/register_email"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/register_surname"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle"
+                android:ems="11"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
 
-    <CheckBox
-        android:id="@+id/register_policy_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/register_passwordagain"
-        android:layout_alignStart="@id/register_passwordagain"
-        android:layout_marginTop="5dp" />
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/register_email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle"
+                android:ems="11"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/register_policy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/register_passwordagain"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@id/register_policy_checkbox"
-        android:text="@string/policy" />
+            <EditText
+                android:id="@+id/register_passwordagain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/register_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle"
+                android:ems="11"
+                android:hint="@string/passwordagain"
+                android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/register_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/register_policy"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20sp"
-        android:background="@drawable/round"
-        android:onClick="register_register_click"
-        android:text="@string/register"
-        android:textAllCaps="false" />
+            <CheckBox
+                android:id="@+id/register_policy_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/register_passwordagain"
+                android:layout_alignStart="@id/register_passwordagain"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:id="@+id/register_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/register_passwordagain"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/register_policy_checkbox"
+                android:text="@string/policy" />
+
+            <Button
+                android:id="@+id/register_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/register_policy"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20sp"
+                android:background="@drawable/round"
+                android:onClick="register_register_click"
+                android:text="@string/register"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
