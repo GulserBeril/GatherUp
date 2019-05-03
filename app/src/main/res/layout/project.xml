@@ -56,7 +56,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/round"
-        android:text="@string/projectname" />
+        android:text="@string/projectname"
+        android:onClick="project_project_click"/>
 
     <Button
         android:id="@+id/project_projectname2"
