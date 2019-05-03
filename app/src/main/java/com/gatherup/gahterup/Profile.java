@@ -58,6 +58,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
         profile_navigation = findViewById(R.id.profile_navigation);
 
         profile_profilepicture = findViewById(R.id.profile_profilepicture);
