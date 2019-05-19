@@ -17,6 +17,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class InsideProject extends AppCompatActivity {
     BottomNavigationView inside_project_navigation;
 
@@ -49,7 +51,10 @@ public class InsideProject extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        String projectname = task.getResult().getData().get("projectname").toString();
+
+                        //indexe göre projeleri getirmeyi yap!!!
+
+                        /*String projectname = task.getResult().getData().get("projectname").toString();
                         String numberofparticipant = task.getResult().getData().get("numberofparticipant").toString();
                         String projectdescription = task.getResult().getData().get("projectdescription").toString();
                         String projectneeds = task.getResult().getData().get("projectneeds").toString();
@@ -60,7 +65,17 @@ public class InsideProject extends AppCompatActivity {
                         inside_project_projectneeds.setText(projectneeds);
 
                         inside_project_title.setText(projectname);
-                        inside_project_projectname.setText(projectname);
+                        inside_project_projectname.setText(projectname);*/
+                        ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
+                        ArrayList<String> numberofparticipant = (ArrayList<String>) document.get("numberofparticipant");
+                        ArrayList<String> projectdescription = (ArrayList<String>) document.get("projectdescription");
+                        ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
+                        for (int i = 0; i < projectname.size(); i++) {
+                            inside_project_projectname.setText(projectname.get(i));
+                            /*inside_project_howmany.setText(numberofparticipant.get(i));
+                            inside_project_projectdescription.setText(projectdescription.get(i));
+                            inside_project_projectneeds.setText(projectneeds.get(i));*/
+                        }
 
                     } else {
                         Toast.makeText(InsideProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();

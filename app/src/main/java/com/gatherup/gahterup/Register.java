@@ -113,11 +113,11 @@ public class Register extends AppCompatActivity {
 
                 db.collection("users").document(auth.getCurrentUser().getUid().toString()).set(map);
 
-                Map<String, String> map2 = new HashMap<>();
-                map2.put("projectname", "");
-                map2.put("numberofparticipant", "");
-                map2.put("projectdescription", "");
-                map2.put("projectneeds", "");
+                Map<String, Object> map2 = new HashMap<>();
+                map2.put("projectname", FieldValue.arrayUnion());
+                map2.put("numberofparticipant", FieldValue.arrayUnion());
+                map2.put("projectdescription", FieldValue.arrayUnion());
+                map2.put("projectneeds", FieldValue.arrayUnion());
 
                 db.collection("projects").document(auth.getCurrentUser().getUid().toString()).set(map2);
 
