@@ -1,8 +1,11 @@
 package com.gatherup.gahterup;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,6 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,11 +22,20 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class InsideProject extends AppCompatActivity {
     BottomNavigationView inside_project_navigation;
 
     TextView inside_project_title, inside_project_projectname, inside_project_howmany, inside_project_projectdescription, inside_project_projectneeds;
     Switch inside_project_onlymanager_switch, inside_project_everymember_switch;
+    CompactCalendarView compactCalendarView;
+    final Calendar calendar = Calendar.getInstance();
+    private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
+
 
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -98,5 +112,30 @@ public class InsideProject extends AppCompatActivity {
                 return true;
             }
         });
+        final ActionBar actionBar = getSupportActionBar();
+        compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
+        compactCalendarView.setUseThreeLetterAbbreviation(true);
+
+        Event ev1 = new Event(Color.RED,1558282278000L,"There are tasks to do.");
+        compactCalendarView.addEvent(ev1);
+
+        compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+            @Override
+            public void onDayClick(Date dateClicked) {
+                Context context = getApplicationContext();
+                if(dateClicked.toString().compareTo("Tue May 21 00:00:00 GMT 2019")==0){
+                    Toast.makeText(context,"There is a task you need to do !!!",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"No events Planned for that day",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onMonthScroll(Date firstDayOfNewMonth) {
+                actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
+            }
+        });
+
     }
 }
