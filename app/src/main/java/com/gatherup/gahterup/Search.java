@@ -26,7 +26,7 @@ public class Search extends AppCompatActivity {
                         startActivity(new Intent(Search.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(Search.this, MessageInbox.class));
+                        startActivity(new Intent(Search.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(Search.this, Notification.class));

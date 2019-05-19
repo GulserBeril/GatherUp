@@ -4,30 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateProject_Edit">
-
+    tools:context=".CreateProject_Save">
     <TextView
-        android:id="@+id/create_project_edit_title"
+        android:id="@+id/create_project_save_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/editproject"
+        android:text="@string/createaproject"
         android:textColor="@color/Black" />
 
     <ScrollView
-        android:id="@+id/create_project_edit_scroll"
+        android:id="@+id/create_project_save_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/create_project_edit_navigation"
-        android:layout_below="@id/create_project_edit_title">
+        android:layout_above="@id/create_project_save_navigation"
+        android:layout_below="@id/create_project_save_title">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/create_project_edit_decidename"
+                android:id="@+id/create_project_save_decidename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -36,10 +35,10 @@
                 android:textColor="@color/Black" />
 
             <EditText
-                android:id="@+id/create_project_edit_projectname"
+                android:id="@+id/create_project_save_projectname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_decidename"
+                android:layout_below="@id/create_project_save_decidename"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
@@ -48,43 +47,43 @@
                 android:inputType="textCapWords" />
 
             <TextView
-                android:id="@+id/create_project_edit_howmany_tv"
+                android:id="@+id/create_project_save_howmany_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_projectname"
-                android:layout_alignStart="@id/create_project_edit_decidename"
+                android:layout_below="@id/create_project_save_projectname"
+                android:layout_alignStart="@id/create_project_save_decidename"
                 android:layout_marginTop="30dp"
                 android:text="@string/howmanypeople"
                 android:textColor="@color/Black" />
 
             <EditText
-                android:id="@+id/create_project_edit_howmany"
+                android:id="@+id/create_project_save_howmany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_howmany_tv"
+                android:layout_below="@id/create_project_save_howmany_tv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
                 android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
                 android:inputType="textCapWords"
-                android:onClick="create_project_edit_howmany_click" />
+                android:onClick="create_project_save_howmany_click" />
 
             <TextView
-                android:id="@+id/create_project_edit_projectdescription_tv"
+                android:id="@+id/create_project_save_projectdescription_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_howmany"
-                android:layout_alignStart="@id/create_project_edit_decidename"
+                android:layout_below="@id/create_project_save_howmany"
+                android:layout_alignStart="@id/create_project_save_decidename"
                 android:layout_marginTop="30dp"
                 android:text="@string/projectdescription"
                 android:textColor="@color/Black" />
 
             <EditText
-                android:id="@+id/create_project_edit_projectdescription"
+                android:id="@+id/create_project_save_projectdescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_projectdescription_tv"
+                android:layout_below="@id/create_project_save_projectdescription_tv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
@@ -92,20 +91,20 @@
                 android:inputType="textMultiLine|textCapWords" />
 
             <TextView
-                android:id="@+id/create_project_edit_projectneeds_tv"
+                android:id="@+id/create_project_save_projectneeds_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_projectdescription"
-                android:layout_alignStart="@id/create_project_edit_decidename"
+                android:layout_below="@id/create_project_save_projectdescription"
+                android:layout_alignStart="@id/create_project_save_decidename"
                 android:layout_marginTop="30dp"
                 android:text="@string/projectneeds"
                 android:textColor="@color/Black" />
 
             <EditText
-                android:id="@+id/create_project_edit_projectneeds"
+                android:id="@+id/create_project_save_projectneeds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_projectneeds_tv"
+                android:layout_below="@id/create_project_save_projectneeds_tv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
@@ -114,50 +113,50 @@
                 android:hint="@string/search"
                 android:inputType="textCapWords" />
 
-            <!--<TextView
-                android:id="@+id/create_project_edit_onlymanager"
+            <TextView
+                android:id="@+id/create_project_save_onlymanager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_projectneeds"
+                android:layout_below="@id/create_project_save_projectneeds"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/onlymanager"
                 android:textColor="@color/Black" />
 
             <Switch
-                android:id="@+id/create_project_edit_onlymanager_switch"
+                android:id="@+id/create_project_save_onlymanager_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/create_project_edit_everymember_switch"
-                android:layout_alignTop="@id/create_project_edit_onlymanager"
-                android:layout_toEndOf="@id/create_project_edit_onlymanager" />
+                android:layout_alignStart="@id/create_project_save_everymember_switch"
+                android:layout_alignTop="@id/create_project_save_onlymanager"
+                android:layout_toEndOf="@id/create_project_save_onlymanager" />
 
             <TextView
-                android:id="@+id/create_project_edit_everymember"
+                android:id="@+id/create_project_save_everymember"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_onlymanager"
+                android:layout_below="@id/create_project_save_onlymanager"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/everymember"
                 android:textColor="@color/Black" />
 
             <Switch
-                android:id="@+id/create_project_edit_everymember_switch"
+                android:id="@+id/create_project_save_everymember_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/create_project_edit_everymember"
+                android:layout_alignTop="@id/create_project_save_everymember"
                 android:layout_marginStart="20dp"
-                android:layout_toEndOf="@id/create_project_edit_everymember" />-->
+                android:layout_toEndOf="@id/create_project_save_everymember" />
 
             <Button
-                android:id="@+id/create_project_edit_create"
+                android:id="@+id/create_project_save_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_edit_projectneeds"
+                android:layout_below="@id/create_project_save_everymember"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:onClick="create_project_edit_save_click"
+                android:onClick="create_project_save_save_click"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/round"
                 android:text="@string/create" />
@@ -167,13 +166,13 @@
 
 
     <FrameLayout
-        android:id="@+id/create_project_edit_container"
+        android:id="@+id/create_project_save_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/create_project_edit_navigation"
+        android:id="@+id/create_project_save_navigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

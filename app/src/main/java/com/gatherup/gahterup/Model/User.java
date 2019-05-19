@@ -2,6 +2,7 @@ package com.gatherup.gahterup.Model;
 
 public class User {
 
+    String id;
     String name;
     String surname;
     String email;
@@ -9,7 +10,7 @@ public class User {
     String birthdate;
     String universityname;
     String entranceyear;
-    String abilities;
+    //String abilities;
     String year;
     String duty;
     String position;
@@ -21,7 +22,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, String abilities, String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
+    public User(String id, String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, /*String abilities,*/ String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -29,7 +31,7 @@ public class User {
         this.birthdate = birthdate;
         this.universityname = universityname;
         this.entranceyear = entranceyear;
-        this.abilities = abilities;
+        //this.abilities = abilities;
         this.year = year;
         this.duty = duty;
         this.position = position;
@@ -37,6 +39,14 @@ public class User {
         this.projectdescription = projectdescription;
         this.imageURL = imageURL;
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String name) {
+        this.id = id;
     }
 
     public String getName() {
@@ -87,13 +97,13 @@ public class User {
         this.universityname = universityname;
     }
 
-    public String getAbilities() {
+   /* public String getAbilities() {
         return abilities;
     }
 
     public void setAbilities(String abilities) {
         this.abilities = abilities;
-    }
+    }*/
 
     public String getEntranceyear() {
         return entranceyear;

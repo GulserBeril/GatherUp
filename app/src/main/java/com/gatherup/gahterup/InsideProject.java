@@ -85,7 +85,7 @@ public class InsideProject extends AppCompatActivity {
                         startActivity(new Intent(InsideProject.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(InsideProject.this, MessageInbox.class));
+                        startActivity(new Intent(InsideProject.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(InsideProject.this, Notification.class));

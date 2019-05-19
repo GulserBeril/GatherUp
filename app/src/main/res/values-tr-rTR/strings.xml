@@ -100,4 +100,7 @@
     <string name="enterparticipant">Katılımcı sayısını girin</string>
     <string name="error_">Hata :</string>
     <string name="checkemail">E-postanı kontrol et</string>
+    <string name="editproject">Proje Düzenle</string>
+    <string name="inbox">Gelen Kutusu</string>
+    <string name="users">Kullanı</string>
 </resources>

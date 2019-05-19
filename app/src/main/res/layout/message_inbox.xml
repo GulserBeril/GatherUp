@@ -1,54 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MessageInbox">
+    tools:context=".Fragments.MessageInbox">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/message_inbox_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/messages"
-        android:textColor="@color/Black" />
-
-    <ScrollView
-        android:id="@+id/message_inbox_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/message_inbox_navigation"
-        android:layout_below="@id/message_inbox_title">
+        android:layout_height="match_parent" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-        </RelativeLayout>
-    </ScrollView>
-
-
-    <FrameLayout
-        android:id="@+id/message_inbox_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    </FrameLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/message_inbox_navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        app:itemBackground="@color/Blue"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/navigation" />
-
-</RelativeLayout>
+</FrameLayout>

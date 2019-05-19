@@ -6,29 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".Message">
 
-    <Button
-        android:id="@+id/message_back"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/back"
-        android:onClick="message_back_click"/>
+    <include
+        android:id="@+id/message_toolbar"
+        layout="@layout/bar_layout" />
 
-    <ScrollView
-        android:id="@+id/message_scroll"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/message_tab_layout"
         android:layout_width="match_parent"
+        android:layout_below="@id/message_toolbar"
         android:layout_height="wrap_content"
-        android:layout_above="@id/message_navigation"
-        android:layout_below="@id/message_back">
+        android:background="@color/Transparent"
+        app:tabIndicatorColor="@color/Black"
+        app:tabSelectedTextColor="@color/Black"
+        app:tabTextColor="@color/Black" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-        </RelativeLayout>
-    </ScrollView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/message_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/message_tab_layout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
     <FrameLayout

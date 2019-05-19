@@ -157,7 +157,7 @@ public class Profile extends AppCompatActivity {
                         startActivity(new Intent(Profile.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(Profile.this, MessageInbox.class));
+                        startActivity(new Intent(Profile.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(Profile.this, Notification.class));

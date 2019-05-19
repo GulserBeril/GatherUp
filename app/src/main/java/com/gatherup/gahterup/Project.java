@@ -39,6 +39,7 @@ public class Project extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+
         DocumentReference ref = db.collection("projects").document(auth.getCurrentUser().getUid().toString());
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -46,11 +47,11 @@ public class Project extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
+                        project_projectname1.setVisibility(View.VISIBLE);
                         String projectname = task.getResult().getData().get("projectname").toString();
-
                         project_projectname1.setText(projectname);
-
-                    } else {
+                    }
+                    else {
                         Toast.makeText(Project.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -73,7 +74,7 @@ public class Project extends AppCompatActivity {
                         startActivity(new Intent(Project.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(Project.this, MessageInbox.class));
+                        startActivity(new Intent(Project.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(Project.this, Notification.class));
@@ -89,7 +90,7 @@ public class Project extends AppCompatActivity {
     }
 
     public void project_createprojectgroup_click(View view) {
-        Intent intent = new Intent(this, CreateProject_Edit.class);
+        Intent intent = new Intent(this, CreateProject_Save.class);
         startActivity(intent);
     }
 

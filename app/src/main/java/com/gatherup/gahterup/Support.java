@@ -27,7 +27,7 @@ public class Support extends AppCompatActivity {
                         startActivity(new Intent(Support.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(Support.this, MessageInbox.class));
+                        startActivity(new Intent(Support.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(Support.this, Notification.class));

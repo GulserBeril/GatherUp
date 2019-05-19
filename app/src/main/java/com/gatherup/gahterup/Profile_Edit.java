@@ -153,7 +153,7 @@ public class Profile_Edit extends AppCompatActivity {
                         startActivity(new Intent(Profile_Edit.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(Profile_Edit.this, MessageInbox.class));
+                        startActivity(new Intent(Profile_Edit.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(Profile_Edit.this, Notification.class));

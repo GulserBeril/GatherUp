@@ -30,7 +30,7 @@ public class Notification extends AppCompatActivity {
                         startActivity(new Intent(Notification.this, Project.class));
                         break;
                     case R.id.navigation_messages:
-                        startActivity(new Intent(Notification.this, MessageInbox.class));
+                        startActivity(new Intent(Notification.this, Message.class));
                         break;
                     case R.id.navigation_notifications:
                         startActivity(new Intent(Notification.this, Notification.class));

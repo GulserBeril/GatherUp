@@ -32,7 +32,7 @@ import java.util.Map;
 public class CreateProject_Edit extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
     BottomNavigationView create_project_edit_navigation;
     EditText create_project_edit_projectname, create_project_edit_howmany, create_project_edit_projectdescription, create_project_edit_projectneeds;
-    Switch create_project_edit_onlymanager_switch, create_project_edit_everymember_switch;
+    //Switch create_project_edit_onlymanager_switch, create_project_edit_everymember_switch;
     Button create_project_edit_create;
     ListPopupWindow create_project_edit_lpw;
     String[] create_project_edit_list;
@@ -49,8 +49,8 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
         create_project_edit_howmany = findViewById(R.id.create_project_edit_howmany);
         create_project_edit_projectdescription = findViewById(R.id.create_project_edit_projectdescription);
         create_project_edit_projectneeds = findViewById(R.id.create_project_edit_projectneeds);
-        create_project_edit_onlymanager_switch = findViewById(R.id.create_project_edit_onlymanager_switch);
-        create_project_edit_everymember_switch = findViewById(R.id.create_project_edit_everymember_switch);
+        //create_project_edit_onlymanager_switch = findViewById(R.id.create_project_edit_onlymanager_switch);
+        //create_project_edit_everymember_switch = findViewById(R.id.create_project_edit_everymember_switch);
         create_project_edit_create = findViewById(R.id.create_project_edit_create);
 
         create_project_edit_howmany.setOnTouchListener(this);

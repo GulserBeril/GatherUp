@@ -50,8 +50,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-/*
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        /*firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             Intent intent = new Intent(Login.this, HomePage.class);
             startActivity(intent);
