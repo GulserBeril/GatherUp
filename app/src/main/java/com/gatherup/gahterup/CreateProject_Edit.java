@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -143,10 +144,10 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
             return;
         }
 
-        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectname", projectname);
-        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("numberofparticipant", numberofparticipant);
-        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectdescription", projectdescription);
-        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", projectneeds);
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectname", FieldValue.arrayUnion(projectname));
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("numberofparticipant", FieldValue.arrayUnion(numberofparticipant));
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectdescription", FieldValue.arrayUnion(projectdescription));
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", FieldValue.arrayUnion(projectneeds));
 
         Intent intent = new Intent(getApplicationContext(), CreateProject.class);
         startActivity(intent);

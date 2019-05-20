@@ -18,10 +18,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class Project extends AppCompatActivity {
     BottomNavigationView project_navigation;
     EditText project_search;
-    Button project_createprojectgroup, project_projectname1, project_projectname2;
+    Button project_createprojectgroup, project_projectname1, project_projectname2, project_projectname3, project_projectname4;
 
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -35,6 +37,8 @@ public class Project extends AppCompatActivity {
         project_createprojectgroup = findViewById(R.id.project_createprojectgroup);
         project_projectname1 = findViewById(R.id.project_projectname1);
         project_projectname2 = findViewById(R.id.project_projectname2);
+        project_projectname3 = findViewById(R.id.project_projectname3);
+        project_projectname4 = findViewById(R.id.project_projectname4);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -46,23 +50,30 @@ public class Project extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document != null) {
+                    ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
+                    if (projectname.isEmpty()) {
+                        Intent intent = new Intent(Project.this, CreateProject_Save.class);
+                        startActivity(intent);
+                    }//Burada sorun var!!!
+                    if (!projectname.get(0).isEmpty()) {
                         project_projectname1.setVisibility(View.VISIBLE);
-                        String projectname = task.getResult().getData().get("projectname").toString();
-                        project_projectname1.setText(projectname);
+                        project_projectname1.setText(projectname.get(0));
                     }
-                    else {
-                        Toast.makeText(Project.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        return;
+                    if (!projectname.get(1).isEmpty()) {
+                        project_projectname2.setVisibility(View.VISIBLE);
+                        project_projectname2.setText(projectname.get(1));
                     }
-                } else {
-                    Toast.makeText(Project.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                    return;
+                    if (!projectname.get(2).isEmpty()) {
+                        project_projectname3.setVisibility(View.VISIBLE);
+                        project_projectname3.setText(projectname.get(2));
+                    }
+                    if (!projectname.get(3).isEmpty()) {
+                        project_projectname4.setVisibility(View.VISIBLE);
+                        project_projectname4.setText(projectname.get(3));
+                    }
                 }
-
             }
         });
-
         project_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -94,8 +105,7 @@ public class Project extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void project_project_click(View view) {
-
+    public void project_project1_click(View view) {
         Intent intent = new Intent(this, InsideProject.class);
         startActivity(intent);
     }

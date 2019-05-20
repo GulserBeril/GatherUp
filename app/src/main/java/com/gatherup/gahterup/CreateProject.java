@@ -56,15 +56,15 @@ public class CreateProject extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        String projectname = task.getResult().getData().get("projectname").toString();
-                        String numberofparticipant = task.getResult().getData().get("numberofparticipant").toString();
-                        String projectdescription = task.getResult().getData().get("projectdescription").toString();
-                        String projectneeds = task.getResult().getData().get("projectneeds").toString();
+                        ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
+                        ArrayList<String> numberofparticipant = (ArrayList<String>) document.get("numberofparticipant");
+                        ArrayList<String> projectdescription = (ArrayList<String>) document.get("projectdescription");
+                        ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
 
-                        create_project_projectname.setText(projectname);
-                        create_project_howmany.setText(numberofparticipant);
-                        create_project_projectdescription.setText(projectdescription);
-                        create_project_projectneeds.setText(projectneeds);
+                        create_project_projectname.setText(projectname.toString());
+                        create_project_howmany.setText(numberofparticipant.toString());
+                        create_project_projectdescription.setText(projectdescription.toString());
+                        create_project_projectneeds.setText(projectneeds.toString());
 
                     } else {
                         Toast.makeText(CreateProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
