@@ -51,25 +51,58 @@ public class Project extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
+
                     if (projectname.isEmpty()) {
                         Intent intent = new Intent(Project.this, CreateProject_Save.class);
                         startActivity(intent);
-                    }//Burada sorun var!!!
-                    if (!projectname.get(0).isEmpty()) {
-                        project_projectname1.setVisibility(View.VISIBLE);
-                        project_projectname1.setText(projectname.get(0));
                     }
-                    if (!projectname.get(1).isEmpty()) {
-                        project_projectname2.setVisibility(View.VISIBLE);
-                        project_projectname2.setText(projectname.get(1));
-                    }
-                    if (!projectname.get(2).isEmpty()) {
-                        project_projectname3.setVisibility(View.VISIBLE);
-                        project_projectname3.setText(projectname.get(2));
-                    }
-                    if (!projectname.get(3).isEmpty()) {
-                        project_projectname4.setVisibility(View.VISIBLE);
-                        project_projectname4.setText(projectname.get(3));
+                    else {
+                        int i = 0;
+                        switch (i) {
+                            case 0:
+                                if (projectname.get(0) == null) {
+                                    break;
+                                } else {
+                                    project_projectname1.setVisibility(View.VISIBLE);
+                                    project_projectname1.setText(projectname.get(0));
+                                    i++;
+                                    if (projectname.size() == 1) {
+                                        break;
+                                    }
+                                }
+                            case 1:
+                                if (projectname.get(1) == null) {
+                                    break;
+                                } else {
+                                    project_projectname2.setVisibility(View.VISIBLE);
+                                    project_projectname2.setText(projectname.get(1));
+                                    i++;
+                                    if (projectname.size() == 2) {
+                                        break;
+                                    }
+                                }
+                            case 2:
+                                if (projectname.get(2) == null) {
+                                    break;
+                                } else {
+                                    project_projectname3.setVisibility(View.VISIBLE);
+                                    project_projectname3.setText(projectname.get(2));
+                                    i++;
+                                    if (projectname.size() == 3) {
+                                        break;
+                                    }
+                                }
+                            case 3:
+                                if (projectname.get(3) == null) {
+                                    break;
+                                } else {
+                                    project_projectname4.setVisibility(View.VISIBLE);
+                                    project_projectname4.setText(projectname.get(3));
+                                    if (projectname.size() == 4) {
+                                        break;
+                                    }
+                                }
+                        }
                     }
                 }
             }

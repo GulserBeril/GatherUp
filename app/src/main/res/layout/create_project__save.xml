@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateProject_Save">
+
     <TextView
         android:id="@+id/create_project_save_title"
         android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
                 android:background="@drawable/rectangle"
                 android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
-                android:inputType="textCapWords"
+                android:inputType="number"
                 android:onClick="create_project_save_howmany_click" />
 
             <TextView
@@ -113,7 +114,7 @@
                 android:hint="@string/search"
                 android:inputType="textCapWords" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/create_project_save_onlymanager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,18 +148,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/create_project_save_everymember"
                 android:layout_marginStart="20dp"
-                android:layout_toEndOf="@id/create_project_save_everymember" />
+                android:layout_toEndOf="@id/create_project_save_everymember" />-->
 
             <Button
                 android:id="@+id/create_project_save_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/create_project_save_everymember"
+                android:layout_below="@id/create_project_save_projectneeds"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:onClick="create_project_save_save_click"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/round"
+                android:onClick="create_project_save_save_click"
                 android:text="@string/create" />
 
         </RelativeLayout>

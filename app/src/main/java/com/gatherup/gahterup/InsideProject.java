@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,15 +20,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-//<<<<<<< HEAD
 import java.util.ArrayList;
-//=======
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-//>>>>>>> d6df3141affc6557c6f084f5aa95890a9e437222
 
 public class InsideProject extends AppCompatActivity {
     BottomNavigationView inside_project_navigation;
@@ -54,8 +49,8 @@ public class InsideProject extends AppCompatActivity {
         inside_project_howmany = findViewById(R.id.inside_project_howmany);
         inside_project_projectdescription = findViewById(R.id.inside_project_projectdescription);
         inside_project_projectneeds = findViewById(R.id.inside_project_projectneeds);
-        inside_project_onlymanager_switch = findViewById(R.id.inside_project_onlymanager_switch);
-        inside_project_everymember_switch = findViewById(R.id.inside_project_everymember_switch);
+        /*inside_project_onlymanager_switch = findViewById(R.id.inside_project_onlymanager_switch);
+        inside_project_everymember_switch = findViewById(R.id.inside_project_everymember_switch);*/
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -88,11 +83,10 @@ public class InsideProject extends AppCompatActivity {
                         ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
                         for (int i = 0; i < projectname.size(); i++) {
                             inside_project_projectname.setText(projectname.get(i));
-                            /*inside_project_howmany.setText(numberofparticipant.get(i));
+                            inside_project_howmany.setText(numberofparticipant.get(i));
                             inside_project_projectdescription.setText(projectdescription.get(i));
-                            inside_project_projectneeds.setText(projectneeds.get(i));*/
+                            inside_project_projectneeds.setText(projectneeds.get(i));
                         }
-
                     } else {
                         Toast.makeText(InsideProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         return;
