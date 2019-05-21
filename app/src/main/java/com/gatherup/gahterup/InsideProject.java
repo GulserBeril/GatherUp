@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -81,12 +83,12 @@ public class InsideProject extends AppCompatActivity {
                         ArrayList<String> numberofparticipant = (ArrayList<String>) document.get("numberofparticipant");
                         ArrayList<String> projectdescription = (ArrayList<String>) document.get("projectdescription");
                         ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
-                        for (int i = 0; i < projectname.size(); i++) {
-                            inside_project_projectname.setText(projectname.get(i));
-                            inside_project_howmany.setText(numberofparticipant.get(i));
-                            inside_project_projectdescription.setText(projectdescription.get(i));
-                            inside_project_projectneeds.setText(projectneeds.get(i));
-                        }
+
+                        inside_project_projectname.setText(projectname.get(0));
+                        inside_project_howmany.setText(numberofparticipant.get(0));
+                        inside_project_projectdescription.setText(projectdescription.get(0));
+                        inside_project_projectneeds.setText(projectneeds.get(0));
+
                     } else {
                         Toast.makeText(InsideProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         return;
@@ -127,17 +129,17 @@ public class InsideProject extends AppCompatActivity {
         compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
 
-        Event ev1 = new Event(Color.RED,1558282278000L,"There are tasks to do.");
+        Event ev1 = new Event(Color.RED, 1558282278000L, "There are tasks to do.");
         compactCalendarView.addEvent(ev1);
 
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
                 Context context = getApplicationContext();
-                if(dateClicked.toString().compareTo("Tue May 21 00:00:00 GMT 2019")==0){
-                    Toast.makeText(context,"There is a task you need to do !!!",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(context,"No events Planned for that day",Toast.LENGTH_SHORT).show();
+                if (dateClicked.toString().compareTo("Tue May 21 00:00:00 GMT 2019") == 0) {
+                    Toast.makeText(context, "There is a task you need to do !!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "No events Planned for that day", Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "992332256619-n1ksogif844umm0huf7gqs2vmk1qjb4v.apps.googleusercontent.com",
+          "client_id": "992332256619-68uad5dtt2rgips1bdgpp6lf6otpgfb1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gatherup.gahterup",
-            "certificate_hash": "d969be759d4cdf7595a38785bf4a8f9ea13f5df2"
+            "certificate_hash": "264bfb58afaf4ab86ed99069b321db82c6d15509"
+          }
+        },
+        {
+          "client_id": "992332256619-h7bp4k98d58prm5ks3e3oomsut8qbm8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gatherup.gahterup",
+            "certificate_hash": "3b6b6c24e431f118e831c935b95c28cae971c484"
           }
         },
         {
@@ -28,6 +36,14 @@
           "android_info": {
             "package_name": "com.gatherup.gahterup",
             "certificate_hash": "33bb29a74c1ec77eab29694cab2a86b2939452ed"
+          }
+        },
+        {
+          "client_id": "992332256619-n1ksogif844umm0huf7gqs2vmk1qjb4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gatherup.gahterup",
+            "certificate_hash": "d969be759d4cdf7595a38785bf4a8f9ea13f5df2"
           }
         },
         {
@@ -41,20 +57,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "992332256619-q2vcl62q8j1u4qgkrgco9fbvaj744rr7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
