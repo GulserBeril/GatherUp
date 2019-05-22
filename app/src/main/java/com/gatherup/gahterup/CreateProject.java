@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class CreateProject extends AppCompatActivity {
     BottomNavigationView create_project_navigation;
-    TextView create_project_projectname, create_project_howmany, create_project_projectdescription, create_project_projectneeds;
+    TextView create_project_projectname, create_project_howmany, create_project_projectdescription, create_project_projectneeds, create_project_projectusers;
     Switch create_project_onlymanager_switch, create_project_everymember_switch;
 
     FirebaseAuth auth;
@@ -43,28 +43,44 @@ public class CreateProject extends AppCompatActivity {
         create_project_howmany = findViewById(R.id.create_project_howmany);
         create_project_projectdescription = findViewById(R.id.create_project_projectdescription);
         create_project_projectneeds = findViewById(R.id.create_project_projectneeds);
-        create_project_onlymanager_switch = findViewById(R.id.create_project_onlymanager_switch);
-        create_project_everymember_switch = findViewById(R.id.create_project_everymember_switch);
+        create_project_projectusers = findViewById(R.id.create_project_projectusers);
+        /*create_project_onlymanager_switch = findViewById(R.id.create_project_onlymanager_switch);
+        create_project_everymember_switch = findViewById(R.id.create_project_everymember_switch);*/
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        DocumentReference ref = db.collection("projects").document(auth.getCurrentUser().getUid().toString());
+
+
+
+
+        //create_userid ile current idyi eşleştiremediğim için proje bilgilerine ulaşamıyorum
+        DocumentReference ref = db.collection("projects").document();
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
-                        ArrayList<String> numberofparticipant = (ArrayList<String>) document.get("numberofparticipant");
-                        ArrayList<String> projectdescription = (ArrayList<String>) document.get("projectdescription");
+                        String created_userid = task.getResult().getData().get("created_userid").toString();
+                        String projectname = task.getResult().getData().get("projectname").toString();
+                        String numberofparticipant = task.getResult().getData().get("numberofparticipant").toString();
+                        String projectdescription = task.getResult().getData().get("projectdescription").toString();
+
+                        ArrayList<String> projectusers = (ArrayList<String>) document.get("projectusers");
                         ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
 
-                        create_project_projectname.setText(projectname.toString());
-                        create_project_howmany.setText(numberofparticipant.toString());
-                        create_project_projectdescription.setText(projectdescription.toString());
-                        create_project_projectneeds.setText(projectneeds.toString());
+                        create_project_projectname.setText(projectname);
+                        create_project_howmany.setText(numberofparticipant);
+                        create_project_projectdescription.setText(projectdescription);
+
+                        for (int i = 0; i < projectneeds.size(); i++) {
+                            create_project_projectneeds.setText(create_project_projectneeds.getText() + "\n" + projectneeds.get(i) + "\n");
+                        }
+
+                        for (int i = 0; i < projectusers.size(); i++) {
+                            create_project_projectusers.setText(create_project_projectusers.getText() + "\n" + projectusers.get(i) + "\n");
+                        }
 
                     } else {
                         Toast.makeText(CreateProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();

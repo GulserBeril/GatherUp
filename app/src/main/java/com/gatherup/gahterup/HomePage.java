@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity {
     List<String> userid_list;
 
     FirebaseAuth auth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class HomePage extends AppCompatActivity {
         homepage_listview = findViewById(R.id.homepage_listview);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         homepage_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,9 +107,9 @@ public class HomePage extends AppCompatActivity {
                             System.err.println("Hata oluştu:" + e);
                             return;
                         }
-                      //  List<UserModel> listUsers = new ArrayList<UserModel>();
+                        //  List<UserModel> listUsers = new ArrayList<UserModel>();
                         List<String> namelist = new ArrayList<>();
-                        userid_list=new ArrayList<>();
+                        userid_list = new ArrayList<>();
                         for (DocumentSnapshot doc : snapshots) {
                             UserModel userModel = doc.toObject(UserModel.class);
                             namelist.add(userModel.getName());
@@ -118,7 +119,7 @@ public class HomePage extends AppCompatActivity {
                         }
 
                         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1, namelist);
-                       // homepage_listview.setVisibility(View.VISIBLE);
+                        homepage_listview.setVisibility(View.VISIBLE);
                         homepage_listview.setAdapter(arrayAdapter);
 
                     }

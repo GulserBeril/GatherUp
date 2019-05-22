@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Project">
 
+    <TextView
+        android:id="@+id/project_meetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/bungee"
+        android:text="@string/app_name"
+        android:textColor="@color/Blue"
+        android:textSize="20sp" />
+
     <ScrollView
         android:id="@+id/project_scroll"
         android:layout_width="match_parent"
@@ -16,24 +27,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/project_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/search"
-                android:ems="12"
-                android:inputType="textCapWords" />
+            <!-- <EditText
+                 android:id="@+id/project_search"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="20dp"
+                 android:background="@drawable/rectangle"
+                 android:drawableEnd="@drawable/search"
+                 android:ems="12"
+                 android:inputType="textCapWords" />-->
 
             <Button
                 android:id="@+id/project_createprojectgroup"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_below="@id/project_search"
+
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="70dp"
                 android:background="@drawable/circle"
                 android:onClick="project_createprojectgroup_click"
                 android:text="@string/plus" />
@@ -58,50 +69,12 @@
                 android:text="@string/myprojects"
                 android:textColor="@color/Black" />
 
-            <Button
-                android:id="@+id/project_projectname1"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
+            <ListView
+                android:id="@+id/project_listview"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
                 android:layout_below="@id/project_myproject"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/round"
-                android:visibility="gone"
-                android:onClick="project_project1_click"
-                android:text="@string/projectname" />
-
-            <Button
-                android:id="@+id/project_projectname2"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
-                android:layout_below="@id/project_projectname1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:visibility="gone"
-                android:background="@drawable/round"
-                android:text="@string/projectname"/>
-
-            <Button
-                android:id="@+id/project_projectname3"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
-                android:layout_below="@id/project_projectname2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/round"
-                android:text="@string/projectname"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/project_projectname4"
-                android:layout_width="250dp"
-                android:layout_height="100dp"
-                android:layout_below="@id/project_projectname3"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/round"
-                android:text="@string/projectname"
-                android:visibility="gone" />
+                android:layout_marginTop="20dp" />
         </RelativeLayout>
     </ScrollView>
 

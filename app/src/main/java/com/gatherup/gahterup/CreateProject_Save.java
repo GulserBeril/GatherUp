@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListPopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,15 +29,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateProject_Save extends AppCompatActivity implements View.OnTouchListener, AdapterView.OnItemClickListener {
+public class CreateProject_Save extends AppCompatActivity  {
 
     BottomNavigationView create_project_save_navigation;
     EditText create_project_save_projectname, create_project_save_howmany, create_project_save_projectdescription, create_project_save_projectneeds;
     Button create_project_save_create;
-    ListPopupWindow create_project_save_lpw;
-    String[] create_project_save_list;
+    TextView create_project_save_abilities_list;
 
     FirebaseAuth auth;
+    String currentuserid;
     FirebaseFirestore db;
 
     @Override
@@ -49,15 +50,7 @@ public class CreateProject_Save extends AppCompatActivity implements View.OnTouc
         create_project_save_projectdescription = findViewById(R.id.create_project_save_projectdescription);
         create_project_save_projectneeds = findViewById(R.id.create_project_save_projectneeds);
         create_project_save_create = findViewById(R.id.create_project_save_create);
-        create_project_save_howmany.setOnTouchListener(this);
-
-        create_project_save_list = new String[]{"1", "2", "3", "4"};
-        create_project_save_lpw = new ListPopupWindow(this);
-        create_project_save_lpw.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, create_project_save_list));
-        create_project_save_lpw.setAnchorView(create_project_save_howmany);
-        create_project_save_lpw.setModal(true);
-        create_project_save_lpw.setOnItemClickListener(this);
+        create_project_save_abilities_list = findViewById(R.id.create_project_save_abilities_list);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -94,72 +87,63 @@ public class CreateProject_Save extends AppCompatActivity implements View.OnTouc
 
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        final int DRAWABLE_RIGHT = 2;
 
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (event.getX() >= (v.getWidth() - ((EditText) v)
-                    .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                create_project_save_lpw.show();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String item = create_project_save_list[position];
-        create_project_save_howmany.setText(item);
-        create_project_save_lpw.dismiss();
-    }
 
     public void create_project_save_save_click(View view) {
 
-        final String projectname1 = create_project_save_projectname.getText().toString();
-        final String numberofparticipant1 = create_project_save_howmany.getText().toString();
-        final String projectdescription1 = create_project_save_projectdescription.getText().toString();
-        final String projectneeds1 = create_project_save_projectneeds.getText().toString();
+        final String projectname = create_project_save_projectname.getText().toString();
+        final String numberofparticipant = create_project_save_howmany.getText().toString();
+        final String projectdescription = create_project_save_projectdescription.getText().toString();
+        final String projectneeds = create_project_save_projectneeds.getText().toString();
 
-        if (TextUtils.isEmpty(projectname1)) {
+        if (TextUtils.isEmpty(projectname)) {
             Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterprojectname), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(numberofparticipant1)) {
+        if (TextUtils.isEmpty(numberofparticipant)) {
             Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterparticipant), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(projectdescription1)) {
+        if (TextUtils.isEmpty(projectdescription)) {
             Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterprojectdescription), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(projectneeds1)) {
+        if (TextUtils.isEmpty(projectneeds)) {
             Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.enterprojectneeds), Toast.LENGTH_SHORT).show();
             return;
         }
-        DocumentReference ref = db.collection("projects").document(auth.getCurrentUser().getUid().toString());
+        currentuserid = auth.getCurrentUser().getUid().toString();
+        DocumentReference ref = db.collection("projects").document(currentuserid);
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
-                    ArrayList<String> numberofparticipant = (ArrayList<String>) document.get("numberofparticipant");
-                    ArrayList<String> projectdescription = (ArrayList<String>) document.get("projectdescription");
-                    ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
-                    if (projectname.size() < 4) {
-                        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectname", FieldValue.arrayUnion(projectname1));
-                        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("numberofparticipant", FieldValue.arrayUnion(numberofparticipant1));
-                        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectdescription", FieldValue.arrayUnion(projectdescription1));
-                        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", FieldValue.arrayUnion(projectneeds1));
-                    } else {
-                        Toast.makeText(CreateProject_Save.this, "You cannot add more", Toast.LENGTH_SHORT).show();
-                    }
+                    Map<String, Object> map = new HashMap<>();
+
+                    map.put("created_userid", currentuserid);
+                    map.put("numberofparticipant", numberofparticipant);
+                    map.put("projectdescription", projectdescription);
+                    map.put("projectname", projectname);
+                    map.put("projectneeds", FieldValue.arrayUnion(projectneeds));
+                    map.put("projectusers", FieldValue.arrayUnion());
+
+                    db.collection("projects").document().set(map);
+
                 }
             }
         });
         Intent intent = new Intent(getApplicationContext(), CreateProject.class);
         startActivity(intent);
+    }
+
+    public void create_project_add_click(View view) {
+
+        String abilities = create_project_save_projectneeds.getText().toString();
+        String text = create_project_save_abilities_list.getText().toString();
+        text = text + "\n" + abilities;
+        create_project_save_abilities_list.setText(text);
+
+        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", FieldValue.arrayUnion(abilities));
     }
 }

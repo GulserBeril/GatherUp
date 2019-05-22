@@ -81,9 +81,9 @@ public class Notification extends AppCompatActivity {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+                switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                      kabul();
+                        kabul();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -99,6 +99,7 @@ public class Notification extends AppCompatActivity {
     }
 
     private void kabul() {
+
 
 
     }

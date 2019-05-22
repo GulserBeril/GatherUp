@@ -105,12 +105,12 @@ public class Profile extends AppCompatActivity {
         if (userid == null) {
             userid = currentuserid;
             profile_invite.setVisibility(View.GONE);
+            profile_projectnames.setVisibility(View.GONE);
         } else {
             fillProjects();
         }
+
         DocumentReference ref = db.collection("users").document(userid);
-
-
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

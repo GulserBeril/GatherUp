@@ -108,6 +108,26 @@
                 android:singleLine="false" />
 
             <TextView
+                android:id="@+id/create_project_users_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/create_project_projectneeds"
+                android:layout_alignStart="@id/create_project_projectname_tv"
+                android:layout_marginTop="20dp"
+                android:text="@string/projectusers_"
+                android:textColor="@color/Black" />
+
+            <TextView
+                android:id="@+id/create_project_projectusers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/create_project_projectneeds"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/create_project_needs_tv"
+                android:singleLine="false" />
+
+            <!--<TextView
                 android:id="@+id/create_project_onlymanager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/create_project_everymember"
                 android:layout_marginStart="20dp"
-                android:layout_toEndOf="@id/create_project_everymember" />
+                android:layout_toEndOf="@id/create_project_everymember" />-->
 
             <Button
                 android:id="@+id/create_project_edit"

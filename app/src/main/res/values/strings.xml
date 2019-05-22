@@ -102,6 +102,7 @@
     <string name="editproject">Edit Project</string>
     <string name="inbox">Inbox</string>
     <string name="users">Users</string>
+    <string name="projectusers_">Project Users :</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
