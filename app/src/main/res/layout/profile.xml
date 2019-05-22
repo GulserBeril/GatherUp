@@ -301,15 +301,21 @@
                 android:layout_marginBottom="30dp"
                 android:layout_toEndOf="@id/profile_description_tv" />
 
+            <Spinner
+                android:id="@+id/profile_projectnames"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_description"/>
 
-            <!--<Button
-                android:id="@+id/profile_edit"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+
+            <Button
+                android:id="@+id/profile_invite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="invite"
+                android:layout_below="@id/profile_description"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/edit"
-                android:onClick="profile_edit_click" />-->
+                android:layout_marginEnd="20dp" />
 
         </RelativeLayout>
     </ScrollView>

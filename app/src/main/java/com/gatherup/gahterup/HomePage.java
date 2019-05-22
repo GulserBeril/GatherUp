@@ -7,13 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.gatherup.gahterup.Model.User;
+import com.gatherup.gahterup.Model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -32,7 +33,7 @@ public class HomePage extends AppCompatActivity {
     Button homepage_search;
     BottomNavigationView homepage_navigation;
     ListView homepage_listview;
-
+    List<String> userid_list;
 
     FirebaseAuth auth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -55,6 +56,15 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
                 String searchValue = homepage_search_et.getText().toString();
                 getUsers(searchValue);
+            }
+        });
+        homepage_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String user_id = userid_list.get(position);
+                Intent intent = new Intent(HomePage.this, Profile.class);
+                intent.putExtra("userid", user_id);
+                startActivity(intent);
             }
         });
 
@@ -96,15 +106,19 @@ public class HomePage extends AppCompatActivity {
                             System.err.println("Hata oluştu:" + e);
                             return;
                         }
-                        List<User> listUsers = new ArrayList<User>();
-
+                      //  List<UserModel> listUsers = new ArrayList<UserModel>();
+                        List<String> namelist = new ArrayList<>();
+                        userid_list=new ArrayList<>();
                         for (DocumentSnapshot doc : snapshots) {
-                            User user = doc.toObject(User.class);
+                            UserModel userModel = doc.toObject(UserModel.class);
+                            namelist.add(userModel.getName());
+                            userid_list.add(doc.getId());
                             // verileri bu liste aldık artık ekranda gösterebiliriz
-                            listUsers.add(user);
+                            //listUsers.add(userModel);
                         }
-                        ArrayAdapter<User> arrayAdapter = new ArrayAdapter<User>(HomePage.this, android.R.layout.simple_list_item_1, listUsers);
-                        homepage_listview.setVisibility(View.VISIBLE);
+
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1, namelist);
+                       // homepage_listview.setVisibility(View.VISIBLE);
                         homepage_listview.setAdapter(arrayAdapter);
 
                     }

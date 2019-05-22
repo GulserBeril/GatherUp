@@ -7,30 +7,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.gatherup.gahterup.MessageActivity;
-import com.gatherup.gahterup.Model.User;
+import com.gatherup.gahterup.Model.UserModel;
 import com.gatherup.gahterup.R;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.UserHolder> {
+public class UserAdapter extends FirestoreRecyclerAdapter<UserModel, UserAdapter.UserHolder> {
     public static Context context;
-    List<User> Users;
+    List<UserModel> userModels;
 
-    public UserAdapter(@NonNull FirestoreRecyclerOptions<User> options) {
+    public UserAdapter(@NonNull FirestoreRecyclerOptions<UserModel> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull final User model) {
+    protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull final UserModel model) {
         holder.username.setText(String.valueOf(model.getName()));
         holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         /*

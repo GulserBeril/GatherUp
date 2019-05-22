@@ -113,7 +113,7 @@ public class Register extends AppCompatActivity {
 
                 db.collection("users").document(auth.getCurrentUser().getUid().toString()).set(map);
 
-                Map<String, Object> map2 = new HashMap<>();
+                /*Map<String, Object> map2 = new HashMap<>();
                 map2.put("projectname", "");
                 map2.put("numberofparticipant", "");
                 map2.put("projectdescription", "");
@@ -122,7 +122,7 @@ public class Register extends AppCompatActivity {
                 db.collection("projects").document(auth.getCurrentUser().getUid().toString()).set(map2);
 
                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                startActivity(intent);
+                startActivity(intent);*/
 
 
             }

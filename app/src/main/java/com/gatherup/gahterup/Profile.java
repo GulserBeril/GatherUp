@@ -3,32 +3,41 @@ package com.gatherup.gahterup;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gatherup.gahterup.Model.ProjectModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,11 +45,17 @@ public class Profile extends AppCompatActivity {
 
     BottomNavigationView profile_navigation;
     CircleImageView profile_profilepicture;
+    Button profile_invite;
     TextView profile_name, profile_surname, profile_email, profile_birthdate, profile_universityname, profile_entranceyear, profile_year, profile_duty, profile_position, profile_projectname, profile_description, profile_abilities_list;
+    Spinner profile_projectnames;
 
     FirebaseAuth auth;
     FirebaseFirestore db;
     private FirebaseStorage storageReference;
+    String userid = null;
+    String currentuserid;
+    String currentusername;
+    List<String> project_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +70,12 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Profile.this, HomePage.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
             }
         });
 
+
+        userid = getIntent().getStringExtra("userid");
 
         profile_navigation = findViewById(R.id.profile_navigation);
 
@@ -74,13 +92,25 @@ public class Profile extends AppCompatActivity {
         profile_projectname = findViewById(R.id.profile_projectname);
         profile_description = findViewById(R.id.profile_description);
         profile_abilities_list = findViewById(R.id.profile_abilities_list);
+        profile_invite = findViewById(R.id.profile_invite);
+        profile_projectnames = findViewById(R.id.profile_projectnames);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance();
 
+        currentuserid = auth.getCurrentUser().getUid().toString();
+        currentusername = auth.getCurrentUser().getEmail().toString();
+        //userid kullanıcı arama sayfasındaki seçili kişinin idsidir
+        if (userid == null) {
+            userid = currentuserid;
+            profile_invite.setVisibility(View.GONE);
+        } else {
+            fillProjects();
+        }
+        DocumentReference ref = db.collection("users").document(userid);
 
-        DocumentReference ref = db.collection("users").document(auth.getCurrentUser().getUid().toString());
+
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -114,7 +144,7 @@ public class Profile extends AppCompatActivity {
                         profile_description.setText(description);
 
                         for (int i = 0; i < abilities_list.size(); i++) {
-                            profile_abilities_list.setText(profile_abilities_list.getText()+ "\n" + abilities_list.get(i) + "\n");
+                            profile_abilities_list.setText(profile_abilities_list.getText() + "\n" + abilities_list.get(i) + "\n");
                         }
 
                     } else {
@@ -126,6 +156,12 @@ public class Profile extends AppCompatActivity {
                     return;
                 }
 
+            }
+        });
+        profile_invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Invite();
             }
         });
 
@@ -170,6 +206,56 @@ public class Profile extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void Invite() {
+        String projectid = project_list.get(profile_projectnames.getSelectedItemPosition());
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("user_id", userid);
+        map.put("project_id", projectid);
+        map.put("inviter", currentuserid);
+        map.put("inviter_name", currentusername);
+        map.put("state", false);
+        map.put("project_name", profile_projectnames.getSelectedItem().toString());
+
+        db.collection("notifications").document().set(map);
+    }
+
+    private void fillProjects() {
+
+        CollectionReference projects = db.collection("projects");
+
+
+        projects.whereEqualTo("created_userid", currentuserid)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@javax.annotation.Nullable QuerySnapshot snapshots,
+                                        @Nullable FirebaseFirestoreException e) {
+
+                        if (e != null) {
+                            System.err.println("Hata oluştu:" + e);
+                            return;
+                        }
+                        //  List<UserModel> listUsers = new ArrayList<UserModel>();
+                        List<String> namelist = new ArrayList<>();
+                        project_list = new ArrayList<>();
+                        for (DocumentSnapshot doc : snapshots) {
+                            ProjectModel user = doc.toObject(ProjectModel.class);
+                            namelist.add(user.getProjectname());
+                            project_list.add(doc.getId());
+                            // verileri bu liste aldık artık ekranda gösterebiliriz
+                            //listUsers.add(userModel);
+                        }
+
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Profile.this, android.R.layout.simple_spinner_item, namelist);
+                        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                        // homepage_listview.setVisibility(View.VISIBLE);
+                        profile_projectnames.setAdapter(arrayAdapter);
+
+                    }
+                });
+
     }
 
     /*

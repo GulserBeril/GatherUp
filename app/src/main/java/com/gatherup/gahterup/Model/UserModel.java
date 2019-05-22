@@ -1,6 +1,6 @@
 package com.gatherup.gahterup.Model;
 
-public class User {
+public class UserModel {
 
     String id;
     String name;
@@ -19,10 +19,10 @@ public class User {
     String imageURL;
 
 
-    public User() {
+    public UserModel() {
     }
 
-    public User(String id, String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, /*String abilities,*/ String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
+    public UserModel(String id, String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, /*String abilities,*/ String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
         this.id = id;
         this.name = name;
         this.surname = surname;

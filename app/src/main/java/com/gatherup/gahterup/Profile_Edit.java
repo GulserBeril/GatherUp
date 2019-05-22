@@ -15,17 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.gatherup.gahterup.Model.User;
+import com.gatherup.gahterup.Model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -39,7 +35,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,7 +46,7 @@ public class Profile_Edit extends AppCompatActivity {
     EditText profile_edit_name, profile_edit_surname, profile_edit_email, profile_edit_birthdate, profile_edit_universityname, profile_edit_entranceyear, profile_edit_year, profile_edit_duty, profile_edit_position, profile_edit_projectname, profile_edit_description, profile_edit_combo;
     TextView profile_edit_abilities_list;
 
-    User user;
+    UserModel userModel;
 
     //ArrayList<String> abilitieslist = new ArrayList<String>();
 

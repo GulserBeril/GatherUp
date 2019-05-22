@@ -26,17 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/notification_search"
+            <ListView
+                android:id="@+id/notification_listview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangle"
-                android:drawableRight="@drawable/search"
-                android:ems="12"
-                android:hint="@string/search"
-                android:inputType="textCapWords" />
+                android:layout_height="wrap_content">
+
+            </ListView>
 
 
         </RelativeLayout>
