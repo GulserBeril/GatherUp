@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,11 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -30,6 +34,7 @@ public class CreateProject extends AppCompatActivity {
     BottomNavigationView create_project_navigation;
     TextView create_project_projectname, create_project_howmany, create_project_projectdescription, create_project_projectneeds, create_project_projectusers;
     Switch create_project_onlymanager_switch, create_project_everymember_switch;
+    String currentuserid;
 
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -38,6 +43,7 @@ public class CreateProject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_project);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         create_project_navigation = findViewById(R.id.create_project_navigation);
         create_project_projectname = findViewById(R.id.create_project_projectname);
         create_project_howmany = findViewById(R.id.create_project_howmany);
@@ -50,11 +56,11 @@ public class CreateProject extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        currentuserid = auth.getCurrentUser().getUid().toString();
 
 
+        //created_userid ile current idyi eşleştiremediğim için proje bilgilerine ulaşamıyorum
 
-
-        //create_userid ile current idyi eşleştiremediğim için proje bilgilerine ulaşamıyorum
         DocumentReference ref = db.collection("projects").document();
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

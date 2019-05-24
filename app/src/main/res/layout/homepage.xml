@@ -75,7 +75,7 @@
                 android:text="@string/projectsforyou"
                 android:textColor="@color/Blue" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/homepage_announcements"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/homepage_date_et"
                 android:text="@string/projectname"
-                android:textColor="@color/Blue" />
+                android:textColor="@color/Blue" />-->
         </RelativeLayout>
     </ScrollView>
 

@@ -15,12 +15,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gatherup.gahterup.Fragments.Users;
+import com.gatherup.gahterup.Model.ProjectModel;
 import com.gatherup.gahterup.Model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,11 +35,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,11 +51,12 @@ public class Profile_Edit extends AppCompatActivity {
     Button profile_edit_back, profile_edit_addmore_abilities, profile_edit_addmore_projects, profile_edit_save;
     CircleImageView profile_edit_profilepicture;
     EditText profile_edit_name, profile_edit_surname, profile_edit_email, profile_edit_birthdate, profile_edit_universityname, profile_edit_entranceyear, profile_edit_year, profile_edit_duty, profile_edit_position, profile_edit_projectname, profile_edit_description, profile_edit_combo;
-    TextView profile_edit_abilities_list;
+    //TextView profile_edit_abilities_list;
+    ListView profile_edit_abilities_list;
+    List<String> abilities_list;
 
     UserModel userModel;
 
-    //ArrayList<String> abilitieslist = new ArrayList<String>();
 
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -58,6 +66,7 @@ public class Profile_Edit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_edit);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         profile_edit_navigation = findViewById(R.id.profile_edit_navigation);
         profile_edit_combo = findViewById(R.id.profile_edit_combo);
         profile_edit_back = findViewById(R.id.profile_edit_back);
@@ -125,9 +134,16 @@ public class Profile_Edit extends AppCompatActivity {
                         profile_edit_projectname.setText(projectname);
                         profile_edit_description.setText(description);
 
-                        for (int i = 0; i < abilities_list.size(); i++) {
+
+
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Profile_Edit.this, android.R.layout.simple_list_item_1, abilities_list);
+                        profile_edit_abilities_list.setVisibility(View.VISIBLE);
+                        profile_edit_abilities_list.setAdapter(arrayAdapter);
+
+
+                        /*for (int i = 0; i < abilities_list.size(); i++) {
                             profile_edit_abilities_list.setText(profile_edit_abilities_list.getText() + "\n" + abilities_list.get(i) + "\n");
-                        }
+                        }*/
                     } else {
                         Toast.makeText(Profile_Edit.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();
                     }
@@ -237,14 +253,21 @@ public class Profile_Edit extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
     public void profile_edit_abilities_click(View view) {
 
+        abilities_list = new ArrayList<String>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Profile_Edit.this, android.R.layout.simple_list_item_1, abilities_list);
+
         String abilities = profile_edit_combo.getText().toString();
-        String text = profile_edit_abilities_list.getText().toString();
-        text = text + "\n" + abilities;
-        profile_edit_abilities_list.setText(text);
+        abilities_list.add(abilities);
+        profile_edit_combo.clearFocus();
+        profile_edit_abilities_list.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
+
 
         db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("abilities", FieldValue.arrayUnion(abilities));
+
 
         /*
         DocumentReference reflist = db.collection("users").document(auth.getCurrentUser().getUid().toString());

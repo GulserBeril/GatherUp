@@ -63,7 +63,6 @@
     <string name="creditsandreferences">Krediler ve Referanslar</string>
     <string name="messages">Mesajlar</string>
     <string name="plus">+</string>
-    <string name="addmore">Daha Fazla</string>
     <string name="abilities_interest">Yetenekler/İlgi Alanları</string>
     <string name="requiredfields">Tüm alanlar zorunludur</string>
     <string name="login">Giriş</string>
@@ -102,5 +101,7 @@
     <string name="checkemail">E-postanı kontrol et</string>
     <string name="editproject">Proje Düzenle</string>
     <string name="inbox">Gelen Kutusu</string>
-    <string name="users">Kullanı</string>
+    <string name="users">Kullanıcılar</string>
+    <string name="addmore">Ekle</string>
+    <string name="projectusers_">Kullanıcılar :</string>
 </resources>

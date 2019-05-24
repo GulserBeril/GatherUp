@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,6 +31,7 @@ public class Notification extends AppCompatActivity {
     BottomNavigationView notification_navigation;
     ListView notification_listview;
     List<String> userid_list;
+    String currentuserid;
 
     FirebaseAuth auth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -38,9 +40,12 @@ public class Notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         notification_listview = findViewById(R.id.notification_listview);
         notification_navigation = findViewById(R.id.notification_navigation);
+
         auth = FirebaseAuth.getInstance();
+        currentuserid = auth.getCurrentUser().getUid().toString();
 
         notification_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,7 +104,7 @@ public class Notification extends AppCompatActivity {
     }
 
     private void kabul() {
-
+      /*db.collection("projects").add("procetusers", currentuserid);*/
 
 
     }

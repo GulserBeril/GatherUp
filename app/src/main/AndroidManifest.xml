@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".MessageActivity"/>
         <activity android:name=".CreateProject_Save" />
         <activity android:name=".CreateProject_Edit" />
         <activity
@@ -49,15 +49,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HomePage"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".ForgotPassword"
@@ -67,8 +59,11 @@
             android:name=".Login"
             android:parentActivityName=".HomePage"
             android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

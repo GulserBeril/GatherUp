@@ -1,5 +1,7 @@
 package com.gatherup.gahterup.Model;
 
+import java.util.ArrayList;
+
 public class UserModel {
 
     String id;
@@ -10,7 +12,7 @@ public class UserModel {
     String birthdate;
     String universityname;
     String entranceyear;
-    //String abilities;
+    ArrayList<String> abilities;
     String year;
     String duty;
     String position;
@@ -22,7 +24,7 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(String id, String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, /*String abilities,*/ String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
+    public UserModel(String id, String name, String surname, String email, String password, String birthdate, String universityname, String entranceyear, ArrayList<String> abilities, String year, String duty, String position, String projectname, String projectdescription, String imageURL) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -31,14 +33,13 @@ public class UserModel {
         this.birthdate = birthdate;
         this.universityname = universityname;
         this.entranceyear = entranceyear;
-        //this.abilities = abilities;
+        this.abilities = abilities;
         this.year = year;
         this.duty = duty;
         this.position = position;
         this.projectname = projectname;
         this.projectdescription = projectdescription;
         this.imageURL = imageURL;
-
     }
 
     public String getId() {
@@ -97,13 +98,13 @@ public class UserModel {
         this.universityname = universityname;
     }
 
-   /* public String getAbilities() {
+    public ArrayList<String> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(String abilities) {
+    public void setAbilities(ArrayList<String> abilities) {
         this.abilities = abilities;
-    }*/
+    }
 
     public String getEntranceyear() {
         return entranceyear;

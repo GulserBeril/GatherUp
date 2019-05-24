@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,9 +43,10 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         homepage_profilepicture = findViewById(R.id.homepage_profilepicture);
         homepage_search_et = findViewById(R.id.homepage_search_et);
-        homepage_date_et = findViewById(R.id.homepage_date_et);
+        //homepage_date_et = findViewById(R.id.homepage_date_et);
         homepage_search = findViewById(R.id.homepage_search);
         homepage_navigation = findViewById(R.id.homepage_navigation);
         homepage_listview = findViewById(R.id.homepage_listview);

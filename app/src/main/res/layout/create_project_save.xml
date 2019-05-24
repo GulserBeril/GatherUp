@@ -65,7 +65,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
                 android:onClick="create_project_save_howmany_click" />
 
@@ -117,20 +116,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/create_project_save_projectneeds_tv"
                 android:layout_marginStart="20dp"
-                android:onClick="create_project_add_click"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/create_project_save_projectneeds"
                 android:background="@drawable/round"
+                android:onClick="create_project_add_click"
                 android:text="@string/addmore" />
 
-            <TextView
+            <ListView
                 android:id="@+id/create_project_save_abilities_list"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_below="@id/create_project_save_add_abilities"
-                android:layout_alignStart="@id/create_project_save_projectneeds"
                 android:layout_marginTop="5dp"
-                android:singleLine="false" />
+                android:visibility="gone" />
 
             <!--<TextView
                 android:id="@+id/create_project_save_onlymanager"

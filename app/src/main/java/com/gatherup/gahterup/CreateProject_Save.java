@@ -7,13 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListPopupWindow;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CreateProject_Save extends AppCompatActivity  {
@@ -34,7 +34,8 @@ public class CreateProject_Save extends AppCompatActivity  {
     BottomNavigationView create_project_save_navigation;
     EditText create_project_save_projectname, create_project_save_howmany, create_project_save_projectdescription, create_project_save_projectneeds;
     Button create_project_save_create;
-    TextView create_project_save_abilities_list;
+    ListView create_project_save_abilities_list;
+    List<String> abilities_list;
 
     FirebaseAuth auth;
     String currentuserid;
@@ -43,7 +44,8 @@ public class CreateProject_Save extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_project__save);
+        setContentView(R.layout.create_project_save);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         create_project_save_navigation = findViewById(R.id.create_project_save_navigation);
         create_project_save_projectname = findViewById(R.id.create_project_save_projectname);
         create_project_save_howmany = findViewById(R.id.create_project_save_howmany);
@@ -125,7 +127,7 @@ public class CreateProject_Save extends AppCompatActivity  {
                     map.put("numberofparticipant", numberofparticipant);
                     map.put("projectdescription", projectdescription);
                     map.put("projectname", projectname);
-                    map.put("projectneeds", FieldValue.arrayUnion(projectneeds));
+                    map.put("projectneeds", FieldValue.arrayUnion(abilities_list));
                     map.put("projectusers", FieldValue.arrayUnion());
 
                     db.collection("projects").document().set(map);
@@ -139,11 +141,16 @@ public class CreateProject_Save extends AppCompatActivity  {
 
     public void create_project_add_click(View view) {
 
-        String abilities = create_project_save_projectneeds.getText().toString();
-        String text = create_project_save_abilities_list.getText().toString();
-        text = text + "\n" + abilities;
-        create_project_save_abilities_list.setText(text);
+        abilities_list = new ArrayList<String>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CreateProject_Save.this, android.R.layout.simple_list_item_1, abilities_list);
 
-        db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", FieldValue.arrayUnion(abilities));
+        String abilities = create_project_save_projectneeds.getText().toString();
+        abilities_list.add(abilities);
+        create_project_save_abilities_list.setVisibility(View.VISIBLE);
+        create_project_save_abilities_list.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
+
+
+        //db.collection("projects").document(auth.getCurrentUser().getUid().toString()).update("projectneeds", FieldValue.arrayUnion(abilities));
     }
 }

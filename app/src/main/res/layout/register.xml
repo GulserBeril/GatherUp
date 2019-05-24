@@ -29,9 +29,9 @@
                 android:id="@+id/register_logo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/logo"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp" />
+                android:layout_marginTop="50dp"
+                android:src="@drawable/logo" />
 
             <EditText
                 android:id="@+id/register_name"
@@ -121,6 +121,13 @@
                 android:onClick="register_register_click"
                 android:text="@string/register"
                 android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/register_result"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_below="@id/register_register"/>
         </RelativeLayout>
     </ScrollView>
+
 </RelativeLayout>

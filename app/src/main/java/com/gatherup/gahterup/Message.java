@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.gatherup.gahterup.Fragments.MessageInbox;
 import com.gatherup.gahterup.Fragments.Users;
@@ -30,6 +31,7 @@ public class Message extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         message_navigation = findViewById(R.id.message_navigation);
         message_tab_layout = findViewById(R.id.message_tab_layout);
         message_view_pager = findViewById(R.id.message_view_pager);

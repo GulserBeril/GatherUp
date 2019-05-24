@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class InsideProject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inside_project);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         inside_project_navigation = findViewById(R.id.inside_project_navigation);
         inside_project_title = findViewById(R.id.inside_project_title);
         inside_project_projectname = findViewById(R.id.inside_project_projectname);
@@ -79,7 +81,7 @@ public class InsideProject extends AppCompatActivity {
 
                         inside_project_title.setText(projectname);
                         inside_project_projectname.setText(projectname);*/
-                        ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
+                        /*ArrayList<String> projectname = (ArrayList<String>) document.get("projectname");
                         ArrayList<String> numberofparticipant = (ArrayList<String>) document.get("numberofparticipant");
                         ArrayList<String> projectdescription = (ArrayList<String>) document.get("projectdescription");
                         ArrayList<String> projectneeds = (ArrayList<String>) document.get("projectneeds");
@@ -87,7 +89,7 @@ public class InsideProject extends AppCompatActivity {
                         inside_project_projectname.setText(projectname.get(0));
                         inside_project_howmany.setText(numberofparticipant.get(0));
                         inside_project_projectdescription.setText(projectdescription.get(0));
-                        inside_project_projectneeds.setText(projectneeds.get(0));
+                        inside_project_projectneeds.setText(projectneeds.get(0));*/
 
                     } else {
                         Toast.makeText(InsideProject.this, getApplicationContext().getString(R.string.failed), Toast.LENGTH_SHORT).show();

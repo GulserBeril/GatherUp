@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +33,7 @@ public class Register extends AppCompatActivity {
     Button register_back, register_register;
     EditText register_name, register_surname, register_email, register_password, register_passwordagain;
     CheckBox register_policy_checkbox;
+    TextView register_result;
 
     FirebaseAuth auth;
 
@@ -39,6 +43,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         register_back = findViewById(R.id.register_back);
         register_register = findViewById(R.id.register_register);
         register_name = findViewById(R.id.register_name);
@@ -47,6 +52,7 @@ public class Register extends AppCompatActivity {
         register_password = findViewById(R.id.register_password);
         register_passwordagain = findViewById(R.id.register_passwordagain);
         register_policy_checkbox = findViewById(R.id.register_policy_checkbox);
+        register_result = findViewById(R.id.register_result);
 
         auth = FirebaseAuth.getInstance();
     }
@@ -120,9 +126,9 @@ public class Register extends AppCompatActivity {
                 map2.put("projectneeds", FieldValue.arrayUnion());
 
                 db.collection("projects").document(auth.getCurrentUser().getUid().toString()).set(map2);
-
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                startActivity(intent);*/
+*/
+                Intent intent = new Intent(getApplicationContext(), Profile_Edit.class);
+                startActivity(intent);
 
 
             }

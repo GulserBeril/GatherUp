@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -61,7 +62,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -252,18 +253,10 @@ public class Profile extends AppCompatActivity {
                         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                         // homepage_listview.setVisibility(View.VISIBLE);
                         profile_projectnames.setAdapter(arrayAdapter);
-
                     }
                 });
-
     }
 
-    /*
-        public void profile_edit_click(View view) {
-            Intent intent = new Intent(Profile.this, Profile_Edit.class);
-            startActivity(intent);
-        }
-    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);

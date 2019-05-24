@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class CreateProject_Edit extends AppCompatActivity implements View.OnTouc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_project_edit);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         create_project_edit_navigation = findViewById(R.id.create_project_edit_navigation);
         create_project_edit_projectname = findViewById(R.id.create_project_edit_projectname);
         create_project_edit_howmany = findViewById(R.id.create_project_edit_howmany);
