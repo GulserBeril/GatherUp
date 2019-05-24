@@ -103,6 +103,15 @@
     <string name="inbox">Inbox</string>
     <string name="users">Users</string>
     <string name="projectusers_">Project Users :</string>
+    <string name="apply">Apply</string>
+    <string name="invite">Invite</string>
+    <string name="acceptoffer">Do you accept the offer?</string>
+    <string name="acceptpartition">Do you accept participation?</string>
+    <string name="accept">Accept</string>
+    <string name="rejectproject">You rejected the project.</string>
+    <string name="reject">Reject</string>
+    <string name="acceptproject">You accepted the project.</string>
+    <string name="acceptparticipation">You have accepted participation.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

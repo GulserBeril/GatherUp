@@ -65,7 +65,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
                 android:inputType="textCapWords"
                 android:onClick="create_project_edit_howmany_click" />
@@ -109,9 +108,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangle"
-                android:drawableEnd="@drawable/drop_down"
                 android:ems="10"
-                android:hint="@string/search"
                 android:inputType="textCapWords" />
 
             <!--<TextView

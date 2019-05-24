@@ -99,7 +99,6 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rectangle"
                 android:ems="10"
-
                 android:inputType="textPassword" />
 
             <TextView

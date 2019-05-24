@@ -109,19 +109,19 @@ public class Notification extends AppCompatActivity {
         String notification_type = notificationModel.getNotification_type();
         String message;
         if (notification_type.equals("invite")) {
-            message = "Teklifi kabul ediyor musunuz?";
+            message = getApplicationContext().getString(R.string.acceptoffer);
         } else {
-            message = "Katılımı kabul ediyor musunuz?";
+            message = getApplicationContext().getString(R.string.acceptpartition);
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
-        builder.setMessage(message).setPositiveButton("Kabul", dialogClickListener)
-                .setNegativeButton("Red", dialogClickListener).show();
+        builder.setMessage(message).setPositiveButton(getApplicationContext().getString(R.string.accept), dialogClickListener)
+                .setNegativeButton(getApplicationContext().getString(R.string.reject), dialogClickListener).show();
     }
 
     private void red(NotificationModel notificationModel) {
         String notificationid = notificationModel.getNotificationid();
         db.collection(Enums.FirebaseTables.notifications.toString()).document(notificationid).update("state", true);
-        Toast.makeText(this, "Projeyi red ettiniz", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getApplicationContext().getString(R.string.rejectproject), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -145,9 +145,9 @@ public class Notification extends AppCompatActivity {
             getNotification();
 
             if (notification_type.equals("invite")) {
-                Toast.makeText(this, "Projeyi kabul ettiniz", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getApplicationContext().getString(R.string.acceptproject), Toast.LENGTH_SHORT).show();
             }else {
-                Toast.makeText(this, inviter +"\n Katılımı kabul ettiniz", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, inviter +"\n" +getApplicationContext().getString(R.string.acceptparticipation), Toast.LENGTH_SHORT).show();
 
             }
             /*db.collection("projects").add("procetusers", currentuserid);*/
@@ -167,7 +167,7 @@ public class Notification extends AppCompatActivity {
                                         @Nullable FirebaseFirestoreException e) {
 
                         if (e != null) {
-                            System.err.println("Hata oluştu:" + e);
+                            System.err.println(getApplicationContext().getString(R.string.failed) + e);
                             return;
                         }
                         //  List<UserModel> listUsers = new ArrayList<UserModel>();

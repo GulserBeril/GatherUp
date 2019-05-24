@@ -104,4 +104,13 @@
     <string name="users">Kullanıcılar</string>
     <string name="addmore">Ekle</string>
     <string name="projectusers_">Kullanıcılar :</string>
+    <string name="apply">Başvur</string>
+    <string name="invite">Davet Et</string>
+    <string name="acceptoffer">Teklifi kabul ediyor musunuz?</string>
+    <string name="acceptpartition">Katılımı kabul ediyor musunuz?</string>
+    <string name="accept">Kabul Et</string>
+    <string name="reject">Reddet</string>
+    <string name="rejectproject">Projeyi reddettiniz.</string>
+    <string name="acceptproject">Projeyi kabul ettiniz.</string>
+    <string name="acceptparticipation">Katılımı kabul ettiniz.</string>
 </resources>

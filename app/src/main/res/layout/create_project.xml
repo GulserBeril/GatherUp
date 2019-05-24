@@ -39,7 +39,7 @@
                 android:id="@+id/create_project_projectname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_alignStart="@id/create_project_howmany"
                 android:layout_marginTop="30dp"
                 android:layout_toEndOf="@id/create_project_projectname_tv"
                 android:singleLine="false" />
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/create_project_numberofpeople_tv"
-                android:layout_marginStart="20dp"
+                android:layout_alignStart="@id/create_project_howmany"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/create_project_description_tv"
                 android:singleLine="false" />
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/create_project_description_tv"
-                android:layout_marginStart="20dp"
+                android:layout_alignStart="@id/create_project_howmany"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/create_project_needs_tv"
                 android:singleLine="false" />
@@ -122,17 +122,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/create_project_projectneeds"
-                android:layout_marginStart="20dp"
+                android:layout_alignStart="@id/create_project_howmany"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/create_project_needs_tv"
                 android:singleLine="false" />
+
             <Button
                 android:id="@+id/applybuton"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/round"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/create_project_projectusers"
-                android:text="apply"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:text="@string/apply"
+                android:visibility="gone" />
 
             <!--<TextView
                 android:id="@+id/create_project_onlymanager"

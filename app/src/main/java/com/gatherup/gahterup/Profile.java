@@ -234,7 +234,7 @@ public class Profile extends AppCompatActivity {
                                         @Nullable FirebaseFirestoreException e) {
 
                         if (e != null) {
-                            System.err.println("Hata oluştu:" + e);
+                            System.err.println(getApplicationContext().getString(R.string.failed) + e);
                             return;
                         }
                         //  List<UserModel> listUsers = new ArrayList<UserModel>();
