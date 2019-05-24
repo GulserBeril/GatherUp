@@ -98,7 +98,7 @@ public class MessageActivity extends AppCompatActivity {
                             UserModel userModel = doc.toObject(UserModel.class);
 
                             if (userModel.getEmail() != null && userModel.getEmail().equals(useremail)) {
-                                msg_username.setText(userModel.getName());
+                                msg_username.setText(userModel.getName() + " " + userModel.getSurname());
                             }
                         }
 
