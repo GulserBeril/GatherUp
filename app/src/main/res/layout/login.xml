@@ -55,10 +55,10 @@
             <ImageView
                 android:id="@+id/login_logo"
                 android:layout_width="150dp"
-                android:src="@drawable/logo"
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp" />
+                android:layout_marginTop="50dp"
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/login_email"
@@ -99,6 +99,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rectangle"
                 android:ems="10"
+
                 android:inputType="textPassword" />
 
             <TextView

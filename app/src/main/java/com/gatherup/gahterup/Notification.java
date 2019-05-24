@@ -13,11 +13,18 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.gatherup.gahterup.Enums.Enums;
+import com.gatherup.gahterup.Helper.ErrorHelper;
+import com.gatherup.gahterup.Helper.UserHelper;
 import com.gatherup.gahterup.Model.NotificationModel;
+import com.gatherup.gahterup.Model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,9 +37,9 @@ import javax.annotation.Nullable;
 public class Notification extends AppCompatActivity {
     BottomNavigationView notification_navigation;
     ListView notification_listview;
-    List<String> userid_list;
+    List<NotificationModel> notificationList;
     String currentuserid;
-
+    UserModel userModel;
     FirebaseAuth auth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -46,12 +53,13 @@ public class Notification extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         currentuserid = auth.getCurrentUser().getUid().toString();
-
+        UserHelper userHelper = new UserHelper();
+        userModel = userHelper.getUser();
         notification_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                yesno();
+                yesno(notificationList.get(position));
             }
         });
         getNotification();
@@ -82,36 +90,77 @@ public class Notification extends AppCompatActivity {
         });
     }
 
-    private void yesno() {
+    private void yesno(final NotificationModel notificationModel) {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        kabul();
+                        kabul(notificationModel);
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
-                        //No button clicked
+                        red(notificationModel);
                         break;
                 }
             }
         };
 
+        String notification_type = notificationModel.getNotification_type();
+        String message;
+        if (notification_type.equals("invite")) {
+            message = "Teklifi kabul ediyor musunuz?";
+        } else {
+            message = "Katılımı kabul ediyor musunuz?";
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
-        builder.setMessage("Kabul ediyor musunuz?").setPositiveButton("Kabul", dialogClickListener)
+        builder.setMessage(message).setPositiveButton("Kabul", dialogClickListener)
                 .setNegativeButton("Red", dialogClickListener).show();
     }
 
-    private void kabul() {
-      /*db.collection("projects").add("procetusers", currentuserid);*/
+    private void red(NotificationModel notificationModel) {
+        String notificationid = notificationModel.getNotificationid();
+        db.collection(Enums.FirebaseTables.notifications.toString()).document(notificationid).update("state", true);
+        Toast.makeText(this, "Projeyi red ettiniz", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void kabul(NotificationModel notificationModel) {
+
+        try {
+            String projectid = notificationModel.getProject_id();
+            String notificationid = notificationModel.getNotificationid();
+            String personel = userModel.getName() + " " + userModel.getSurname();
+            String notification_type = notificationModel.getNotification_type();
+            String inviter = notificationModel.getInviter_name();
+
+            if (notification_type.equals("invite")) {
+                db.collection(Enums.FirebaseTables.projects.toString()).document(projectid).update("projectusers", FieldValue.arrayUnion(personel));
+            } else {
+                db.collection(Enums.FirebaseTables.projects.toString()).document(projectid).update("projectusers", FieldValue.arrayUnion(inviter));
+            }
+
+
+            db.collection(Enums.FirebaseTables.notifications.toString()).document(notificationid).update("state", true);
+            getNotification();
+
+            if (notification_type.equals("invite")) {
+                Toast.makeText(this, "Projeyi kabul ettiniz", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, inviter +"\n Katılımı kabul ettiniz", Toast.LENGTH_SHORT).show();
+
+            }
+            /*db.collection("projects").add("procetusers", currentuserid);*/
+        } catch (Exception e) {
+            ErrorHelper.saveError(Notification.this, e);
+        }
 
 
     }
 
     private void getNotification() {
 
-        db.collection("notifications").whereGreaterThanOrEqualTo("user_id", auth.getCurrentUser().getUid().toString())
+        db.collection("notifications").whereEqualTo("user_id", auth.getCurrentUser().getUid().toString())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots,
@@ -123,11 +172,14 @@ public class Notification extends AppCompatActivity {
                         }
                         //  List<UserModel> listUsers = new ArrayList<UserModel>();
                         List<String> namelist = new ArrayList<>();
-                        userid_list = new ArrayList<>();
+                        notificationList = new ArrayList<>();
                         for (DocumentSnapshot doc : snapshots) {
                             NotificationModel notificaiton = doc.toObject(NotificationModel.class);
-                            namelist.add(notificaiton.getProject_name() + " - " + notificaiton.getInviter_name());
-                            userid_list.add(doc.getId());
+                            notificaiton.setNotificationid(doc.getId());
+                            if (notificaiton.getState() == false) {
+                                namelist.add(notificaiton.getProject_name() + " - " + notificaiton.getInviter_name());
+                                notificationList.add(notificaiton);
+                            }
                             // verileri bu liste aldık artık ekranda gösterebiliriz
                             //listUsers.add(userModel);
                         }

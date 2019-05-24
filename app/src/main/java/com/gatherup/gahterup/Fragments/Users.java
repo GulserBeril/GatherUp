@@ -33,8 +33,6 @@ public class Users extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.users, container, false);
 
-
-
         Query query = ref.orderBy("name", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()

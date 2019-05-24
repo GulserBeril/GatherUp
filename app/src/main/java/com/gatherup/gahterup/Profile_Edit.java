@@ -90,7 +90,7 @@ public class Profile_Edit extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-
+        abilities_list = new ArrayList<String>();
 
         String pp = auth.getCurrentUser().getUid().toString();
         StorageReference storageReference1 = storageReference.child(pp);
@@ -116,7 +116,7 @@ public class Profile_Edit extends AppCompatActivity {
                         String birthdate = task.getResult().getData().get("birthdate").toString();
                         String universityname = task.getResult().getData().get("universityname").toString();
                         String entranceyear = task.getResult().getData().get("entranceyear").toString();
-                        ArrayList<String> abilities_list = (ArrayList<String>) document.get("abilities");
+                        abilities_list = (ArrayList<String>) document.get("abilities");
                         String year = task.getResult().getData().get("year").toString();
                         String duty = task.getResult().getData().get("duty").toString();
                         String position = task.getResult().getData().get("position").toString();
@@ -256,17 +256,16 @@ public class Profile_Edit extends AppCompatActivity {
 
     public void profile_edit_abilities_click(View view) {
 
-        abilities_list = new ArrayList<String>();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Profile_Edit.this, android.R.layout.simple_list_item_1, abilities_list);
-
         String abilities = profile_edit_combo.getText().toString();
         abilities_list.add(abilities);
-        profile_edit_combo.clearFocus();
+        profile_edit_combo.setText("");
+        db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("abilities", FieldValue.arrayUnion(abilities));
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(Profile_Edit.this, android.R.layout.simple_list_item_1, abilities_list);
+
         profile_edit_abilities_list.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
 
-
-        db.collection("users").document(auth.getCurrentUser().getUid().toString()).update("abilities", FieldValue.arrayUnion(abilities));
 
 
         /*

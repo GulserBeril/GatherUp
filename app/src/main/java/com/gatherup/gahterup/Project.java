@@ -69,6 +69,8 @@ public class Project extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Project.this, CreateProject.class);
+                String projectid = project_list.get(position);
+                intent.putExtra("projectid",projectid);
                 startActivity(intent);
             }
         });

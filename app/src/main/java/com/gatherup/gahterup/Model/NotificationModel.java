@@ -8,6 +8,8 @@ public class NotificationModel {
     String project_name;
     Boolean state;
     String user_id;
+    String notificationid;
+    String notification_type;
 
     public NotificationModel() {
     }
@@ -58,5 +60,21 @@ public class NotificationModel {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getNotificationid() {
+        return notificationid;
+    }
+
+    public void setNotificationid(String notificationid) {
+        this.notificationid = notificationid;
+    }
+
+    public String getNotification_type() {
+        return notification_type;
+    }
+
+    public void setNotification_type(String notification_type) {
+        this.notification_type = notification_type;
     }
 }

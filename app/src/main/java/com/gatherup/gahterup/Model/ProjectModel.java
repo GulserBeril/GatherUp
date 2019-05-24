@@ -9,6 +9,7 @@ public class ProjectModel {
     String projectdescription;
     String projectname;
     ArrayList<String> projectneeds;
+    String projectID;
 
     public ProjectModel() {
     }
@@ -51,5 +52,13 @@ public class ProjectModel {
 
     public void setProjectneeds(ArrayList<String> projectneeds) {
         this.projectneeds = projectneeds;
+    }
+
+    public String getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
     }
 }

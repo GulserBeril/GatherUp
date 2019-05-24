@@ -169,18 +169,26 @@
                 android:layout_alignStart="@id/profile_edit_combo"
                 android:layout_marginTop="5dp"
                 android:singleLine="false" />-->
-            <ListView
-                android:id="@+id/profile_edit_abilities_list"
-                android:layout_width="wrap_content"
-                android:visibility="gone"
-                android:layout_below="@id/profile_edit_addmore_abilities"
-                android:layout_height="150dp"/>
+            <LinearLayout
+                android:id="@+id/profile_edit_linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/profile_edit_addmore_abilities">
+
+                <ListView
+                    android:id="@+id/profile_edit_abilities_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/profile_edit_addmore_abilities"
+                    android:scrollbars="horizontal" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/profile_edit_experiences"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_edit_abilities_list"
+                android:layout_below="@id/profile_edit_linear"
                 android:layout_alignStart="@id/profile_edit_personalinfo"
                 android:layout_marginTop="30dp"
                 android:text="@string/experiences"

@@ -124,7 +124,6 @@ public class Profile extends AppCompatActivity {
                         String birthdate = task.getResult().getData().get("birthdate").toString();
                         String universityname = task.getResult().getData().get("universityname").toString();
                         String entranceyear = task.getResult().getData().get("entranceyear").toString();
-
                         ArrayList<String> abilities_list = (ArrayList<String>) document.get("abilities");
                         String year = task.getResult().getData().get("year").toString();
                         String duty = task.getResult().getData().get("duty").toString();
@@ -219,7 +218,7 @@ public class Profile extends AppCompatActivity {
         map.put("inviter_name", currentusername);
         map.put("state", false);
         map.put("project_name", profile_projectnames.getSelectedItem().toString());
-
+        map.put("notification_type", "invite");
         db.collection("notifications").document().set(map);
     }
 

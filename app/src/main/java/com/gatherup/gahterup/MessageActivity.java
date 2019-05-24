@@ -10,9 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gatherup.gahterup.Model.NotificationModel;
+import com.gatherup.gahterup.Model.ProjectModel;
 import com.gatherup.gahterup.Model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,9 +23,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,10 +49,9 @@ public class MessageActivity extends AppCompatActivity {
     //  EditText msg_txt_send;
 
     RecyclerView recyclerView;
-    String userid;
+    String useremail;
     Intent intent;
 
-    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,23 +86,24 @@ public class MessageActivity extends AppCompatActivity {
         // msg_txt_send = findViewById(R.id.msg_txt_send);
 
         intent = getIntent();
-        userid = intent.getStringExtra("userid");
+        useremail = intent.getStringExtra("useremail");
 
-        DocumentReference ref = db.collection("users").document(auth.getCurrentUser().getUid().toString());
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
+        db.collection("users").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot snapshots) {
 
-                    String name = task.getResult().getData().get("name").toString();
-                    if (name.equals(userModel.getName())) {
-                        msg_username.setText(name);
+
+                        for (DocumentSnapshot doc : snapshots) {
+                            UserModel userModel = doc.toObject(UserModel.class);
+
+                            if (userModel.getEmail() != null && userModel.getEmail().equals(useremail)) {
+                                msg_username.setText(userModel.getName());
+                            }
+                        }
+
                     }
-
-                }
-            }
-        });
+                });
 
         String pp = auth.getCurrentUser().getUid().toString();
         StorageReference storageReference1 = storageReference.getReference().child(pp);

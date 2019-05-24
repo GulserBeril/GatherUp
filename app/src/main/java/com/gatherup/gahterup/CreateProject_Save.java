@@ -1,11 +1,13 @@
 package com.gatherup.gahterup;
 
 import android.content.Intent;
+import android.content.SearchRecentSuggestionsProvider;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CreateProject_Save extends AppCompatActivity  {
+public class CreateProject_Save extends AppCompatActivity {
 
     BottomNavigationView create_project_save_navigation;
     EditText create_project_save_projectname, create_project_save_howmany, create_project_save_projectdescription, create_project_save_projectneeds;
@@ -56,7 +60,7 @@ public class CreateProject_Save extends AppCompatActivity  {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        abilities_list = new ArrayList<String>();
 
         create_project_save_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -90,7 +94,6 @@ public class CreateProject_Save extends AppCompatActivity  {
     }
 
 
-
     public void create_project_save_save_click(View view) {
 
         final String projectname = create_project_save_projectname.getText().toString();
@@ -115,33 +118,35 @@ public class CreateProject_Save extends AppCompatActivity  {
             return;
         }
         currentuserid = auth.getCurrentUser().getUid().toString();
-        DocumentReference ref = db.collection("projects").document(currentuserid);
-        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    Map<String, Object> map = new HashMap<>();
 
-                    map.put("created_userid", currentuserid);
-                    map.put("numberofparticipant", numberofparticipant);
-                    map.put("projectdescription", projectdescription);
-                    map.put("projectname", projectname);
-                    map.put("projectneeds", FieldValue.arrayUnion(abilities_list));
-                    map.put("projectusers", FieldValue.arrayUnion());
 
-                    db.collection("projects").document().set(map);
+        Map<String, Object> map = new HashMap<>();
 
-                }
-            }
-        });
+        map.put("created_userid", currentuserid);
+        map.put("numberofparticipant", numberofparticipant);
+        map.put("projectdescription", projectdescription);
+        map.put("projectname", projectname);
+        map.put("projectneeds", FieldValue.arrayUnion());
+        map.put("projectusers", FieldValue.arrayUnion());
+
+        DocumentReference ref = db.collection("projects").document();
+        String projectid = ref.getId();
+
+        ref.set(map);
+
+        for (String item : abilities_list) {
+            db.collection("projects").document(projectid).update("projectneeds", FieldValue.arrayUnion(item));
+        }
+
+
         Intent intent = new Intent(getApplicationContext(), CreateProject.class);
+        intent.putExtra("projectid",projectid);
         startActivity(intent);
     }
 
     public void create_project_add_click(View view) {
 
-        abilities_list = new ArrayList<String>();
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CreateProject_Save.this, android.R.layout.simple_list_item_1, abilities_list);
 
         String abilities = create_project_save_projectneeds.getText().toString();

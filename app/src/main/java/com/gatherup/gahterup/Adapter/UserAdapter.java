@@ -41,7 +41,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<UserModel, UserAdapter
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MessageActivity.class);
-                intent.putExtra("userid", model.getId());
+                intent.putExtra("useremail", model.getEmail());
                 v.getContext().startActivity(intent);
             }
         });
